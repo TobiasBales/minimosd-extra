@@ -17,7 +17,7 @@ boolean getBit(byte Reg, byte whichBit) {
 byte setBit(byte &Reg, byte whichBit, boolean stat) {
     if (stat) {
         Reg = Reg | (1 << whichBit);
-    } 
+    }
     else {
         Reg = Reg & ~(1 << whichBit);
     }
@@ -47,17 +47,17 @@ void InitializeOSD() {
 
 //    osd.setPanel(4,9);
 //    osd.openPanel();
-//    osd.printf_P(PSTR("OSD Initialized, reboot")); 
+//    osd.printf_P(PSTR("OSD Initialized, reboot"));
 //    osd.closePanel();
 
-    // run for ever so user resets 
+    // run for ever so user resets
     for(;;) {}
 
 }
 
 // Write our latest FACTORY settings to EEPROM
 void writeSettings() {
-    // Writing all default parameters to EEPROM, ON = panel enabled  
+    // Writing all default parameters to EEPROM, ON = panel enabled
     // All panels have 3 values:
     //  - Enable/Disable
     //  - X coordinate on screen
@@ -128,10 +128,10 @@ void writeSettings() {
     writeEEPROM(2,  panVel_y_ADDR + offset);
     writeEEPROM(on, panAirSpeed_en_ADDR + offset);
     writeEEPROM(1,  panAirSpeed_x_ADDR + offset);
-    writeEEPROM(1,  panAirSpeed_y_ADDR + offset); 
+    writeEEPROM(1,  panAirSpeed_y_ADDR + offset);
     writeEEPROM(on, panBatteryPercent_en_ADDR + offset);
     writeEEPROM(1,  panBatteryPercent_x_ADDR + offset);
-    writeEEPROM(4,  panBatteryPercent_y_ADDR + offset); 
+    writeEEPROM(4,  panBatteryPercent_y_ADDR + offset);
     writeEEPROM(on, panTime_en_ADDR + offset);
     writeEEPROM(23, panTime_x_ADDR + offset);
     writeEEPROM(13, panTime_y_ADDR + offset);
@@ -174,7 +174,7 @@ void writeSettings() {
     writeEEPROM(off, panDistance_en_ADDR + offset);
     writeEEPROM(22, panDistance_x_ADDR + offset);
     writeEEPROM(2,  panDistance_y_ADDR + offset);
- 
+
     writeEEPROM(30,overspeed_ADDR);
     writeEEPROM(0,stall_ADDR);
     writeEEPROM(100,battv_ADDR); //10Volts
@@ -199,12 +199,12 @@ void readSettings() {
     batt_warn_level = EEPROM.read(OSD_BATT_WARN_ADDR);
     rssi_warn_level = EEPROM.read(OSD_RSSI_WARN_ADDR);
     int i;
-    for(i=0;i < OSD_CALL_SIGN_TOTAL;i++) 
+    for(i=0;i < OSD_CALL_SIGN_TOTAL;i++)
     {
         char_call[i] = EEPROM.read(OSD_CALL_SIGN_ADDR + i);
         if(char_call[i] == 0) break;
     }
-    char_call[i+1] ='\0'; //null terminate the string 
+    char_call[i+1] ='\0'; //null terminate the string
 }
 
 void readPanelSettings() {
@@ -343,7 +343,7 @@ void readPanelSettings() {
     setBit(panD_REG[panel], RSSI_BIT, readEEPROM(panRSSI_en_ADDR + offset));
     panRSSI_XY[0][panel] = readEEPROM(panRSSI_x_ADDR + offset);
     panRSSI_XY[1][panel] = checkPAL(readEEPROM(panRSSI_y_ADDR + offset));
-    
+
     setBit(panD_REG[panel], Eff_BIT, readEEPROM(panEff_en_ADDR + offset));
     panEff_XY[0][panel] = readEEPROM(panEff_x_ADDR + offset);
     panEff_XY[1][panel] = checkPAL(readEEPROM(panEff_y_ADDR + offset));
@@ -383,6 +383,6 @@ void updateSettings(byte panelu, byte panel_x, byte panel_y, byte panel_s ) {
         osd.clear();
         readSettings();
         for(panel = 0; panel < npanels; panel++) readPanelSettings();
-    } 
+    }
 }
 
