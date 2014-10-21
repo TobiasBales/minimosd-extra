@@ -283,13 +283,13 @@ void panRSSI(int first_col, int first_line){
 
   // define variables
     rssi_max = 993;                                       // lowest pwm-value = BEST signal when tx ON
-    rssi_min = 1601;                                      // highest pwm-value = WORST signal when tx OFF
+    rssi_min = 1603;                                      // highest pwm-value = WORST signal when tx OFF
     rssi_range = rssi_min - rssi_max;                // defines rssi-range
     rssi_multip = (100.0 / rssi_range) * (-1.0);  // defines multiplier for scaling to percent and inverts ezuhf's descending to ascending values
     rssi_offset = ((rssi_max * rssi_multip) * (-1.0)) + 100.0; // defines offset for scaling to 0-100
     ezrssi = (chan7_raw * rssi_multip) + rssi_offset;  // scaling calculation based on above variables; set channel number to match ezuhf-receiver's settings
-    lq_min = 1057;                                                // insert lowest value from raw-screen when tx switched off
     lq_max = 1793;                                               // insert highest value from raw-screen when tx switched on
+    lq_min = 1057;                                                // insert lowest value from raw-screen when tx switched off
     lq_range = lq_max - lq_min;                             // defines value range
     lq_multip = 100.0 / lq_range;                            // defines multiplier for percentage scaling
     lq_offset = (lq_max * lq_multip) - 100.0;           // defines offset for 0-100 scaling
@@ -310,6 +310,7 @@ void panRSSI(int first_col, int first_line){
     } 
     
     osd.printf("%c%4.0i%c|%c%4.0i%c", ezRssiString, ezrssi, 0x25, ezLQString, ezlq, 0x25);  //prints two rows panel showing rssi in first and lq in second row
+    //osd.printf("%c%4.0i|%c%4.0i", ezRssiString, chan7_raw, ezLQString, chan8_raw);  //prints RAW values for debug
     osd.closePanel();
 }
 
