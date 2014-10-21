@@ -270,26 +270,46 @@ void panEff(int first_col, int first_line){
 //}
 
 /* **************************************************************** */
-// Panel  : panRSSI
+// Panel  : panRSSI  ---modified to show ezuhf rssi from chan4 and lq from chan6----
 // Needs  : X, Y locations
-// Output : Alt symbol and altitude value in meters from MAVLink
-// Size   : 1 x 7Hea  (rows x chars)
+// Output : transmitter-symbol, rssi scaled to percent, percent-symbol,
+//              lq-symbol, lq scaled to percent, percent-symbol
+// Size   : 2 x 5Hea  (rows x chars)
 // Staus  : done
 
 void panRSSI(int first_col, int first_line){
     osd.setPanel(first_col, first_line);
     osd.openPanel();
 
-    if((rssiraw_on % 2 == 0))
-    {
-       if(osd_rssi < rssipersent) osd_rssi = rssipersent;
-       if(osd_rssi > rssical) osd_rssi = rssical;
-       if(rssiraw_on == 0) rssi = (int16_t)((float)((int16_t)osd_rssi - rssipersent)/(float)(rssical-rssipersent)*100.0f);
-       if(rssiraw_on == 8) rssi = (int16_t)((float)(chan8_raw / 10 - rssipersent)/(float)(rssical-rssipersent)*100.0f);
-    }
-    if(rssiraw_on == 1) rssi = (int16_t)osd_rssi;
-    if(rssiraw_on == 9) rssi = chan8_raw;
-    osd.printf("%c%3i%c", 0x09, rssi, 0x25);
+  // define variables
+    rssi_max = 993;                                       // lowest pwm-value = BEST signal when tx ON
+    rssi_min = 1601;                                      // highest pwm-value = WORST signal when tx OFF
+    rssi_range = rssi_min - rssi_max;                // defines rssi-range
+    rssi_multip = (100.0 / rssi_range) * (-1.0);  // defines multiplier for scaling to percent and inverts ezuhf's descending to ascending values
+    rssi_offset = ((rssi_max * rssi_multip) * (-1.0)) + 100.0; // defines offset for scaling to 0-100
+    ezrssi = (chan7_raw * rssi_multip) + rssi_offset;  // scaling calculation based on above variables; set channel number to match ezuhf-receiver's settings
+    lq_min = 1057;                                                // insert lowest value from raw-screen when tx switched off
+    lq_max = 1793;                                               // insert highest value from raw-screen when tx switched on
+    lq_range = lq_max - lq_min;                             // defines value range
+    lq_multip = 100.0 / lq_range;                            // defines multiplier for percentage scaling
+    lq_offset = (lq_max * lq_multip) - 100.0;           // defines offset for 0-100 scaling
+    ezlq = (chan8_raw * lq_multip) - lq_offset;        // scaling calculation based on above variables; set rc channel number to match receiver's settings
+
+    byte ezRssiString = 0x09;
+  
+    // check if RSSI is under warn level    
+    if ((ezrssi < rssi_warn_level) && blinker){
+      ezRssiString  = 0x20;
+    } 
+    
+    byte ezLQString = 0x40;
+  
+    // check if LQ is under warn level    
+    if ((ezlq < rssi_warn_level) && blinker){
+      ezLQString  = 0x20;
+    } 
+    
+    osd.printf("%c%4.0i%c|%c%4.0i%c", ezRssiString, ezrssi, 0x25, ezLQString, ezlq, 0x25);  //prints two rows panel showing rssi in first and lq in second row
     osd.closePanel();
 }
 

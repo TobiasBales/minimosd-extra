@@ -250,3 +250,16 @@ static int16_t      rssi = -99; // scaled value 0-100%
 static uint8_t      rssiraw_on = 0;
 static uint8_t      rssi_warn_level = 0;
 
+// Custom EZUHF Code
+static uint16_t     ezrssi = 0;
+static uint16_t     ezlq = 0;
+static uint16_t     rssi_max = 0;
+static uint16_t     rssi_min = 0;
+static uint16_t     rssi_range = 0;
+static uint16_t     rssi_multip = -1000;
+static uint16_t     rssi_offset = -1000;
+static uint16_t     lq_max = 0;
+static uint16_t     lq_min = 0;
+static uint16_t     lq_range = 0;
+static uint16_t     lq_multip = 0;
+static uint16_t     lq_offset = 0;
