@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -98,8 +98,8 @@ namespace OSD
             InitializeComponent();
 
             // load default font
-            chars = mcm.readMCM("MinimOSD_" + System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString() + ".mcm");
-            lblPresentedCharset.Text = "Presented Charset: " + "MinimOSD_" + System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString() + ".mcm";
+            chars = mcm.readMCM("OSD_Charset.mcm");
+            lblPresentedCharset.Text = "Presented Charset: OSD_Charset.mcm";
             // load default bg picture
             try
             {
@@ -172,55 +172,38 @@ namespace OSD
 
             a = 0;
 
-            // first 8
-            // Display name,printfunction,X,Y,ENaddress,Xaddress,Yaddress
-            //            panelItems[a++] = new Tuple<string, Func<int, int, int>, int, int, int, int, int>("Center", pan.panCenter, 13, 8, panCenter_en_ADDR, panCenter_x_ADDR, panCenter_y_ADDR);
-            panelItems[a++] = new Tuple<string, Func<int, int, int>, int, int, int, int, int>("Pitch", pan.panPitch, 7, 1, panPitch_en_ADDR, panPitch_x_ADDR, panPitch_y_ADDR);
-            panelItems[a++] = new Tuple<string, Func<int, int, int>, int, int, int, int, int>("Roll", pan.panRoll, 13, 1, panRoll_en_ADDR, panRoll_x_ADDR, panRoll_y_ADDR);
-            panelItems[a++] = new Tuple<string, Func<int, int, int>, int, int, int, int, int>("Battery A", pan.panBatt_A, 14, 13, panBatt_A_en_ADDR, panBatt_A_x_ADDR, panBatt_A_y_ADDR);
-            //items[a++] = new Tuple<string, Func<int, int, int>, int, int, int, int, int>("Battery B", pan.panBatt_B, 21, 3, panBatt_B_en_ADDR, panBatt_B_x_ADDR, panBatt_B_y_ADDR);
-            panelItems[a++] = new Tuple<string, Func<int, int, int>, int, int, int, int, int>("Visible Sats", pan.panGPSats, 26, 11, panGPSats_en_ADDR, panGPSats_x_ADDR, panGPSats_y_ADDR);
-            panelItems[a++] = new Tuple<string, Func<int, int, int>, int, int, int, int, int>("Real heading", pan.panCOG, 22, 14, panCOG_en_ADDR, panCOG_x_ADDR, panCOG_y_ADDR);
-            panelItems[a++] = new Tuple<string, Func<int, int, int>, int, int, int, int, int>("GPS Coord", pan.panGPS, 1, 14, panGPS_en_ADDR, panGPS_x_ADDR, panGPS_y_ADDR);
-
-            //second 8
-            panelItems[a++] = new Tuple<string, Func<int, int, int>, int, int, int, int, int>("Heading Rose", pan.panRose, 21, 15, panRose_en_ADDR, panRose_x_ADDR, panRose_y_ADDR);
-            panelItems[a++] = new Tuple<string, Func<int, int, int>, int, int, int, int, int>("Heading", pan.panHeading, 24, 13, panHeading_en_ADDR, panHeading_x_ADDR, panHeading_y_ADDR);
-            //            panelItems[a++] = new Tuple<string, Func<int, int, int>, int, int, int, int, int>("Heart Beat", pan.panMavBeat, 14, 15, panMavBeat_en_ADDR, panMavBeat_x_ADDR, panMavBeat_y_ADDR);
-            panelItems[a++] = new Tuple<string, Func<int, int, int>, int, int, int, int, int>("Home Direction", pan.panHomeDir, 14, 3, panHomeDir_en_ADDR, panHomeDir_x_ADDR, panHomeDir_y_ADDR);
-            panelItems[a++] = new Tuple<string, Func<int, int, int>, int, int, int, int, int>("Home Distance", pan.panHomeDis, 22, 1, panHomeDis_en_ADDR, panHomeDis_x_ADDR, panHomeDis_y_ADDR);
-            //            panelItems[a++] = new Tuple<string, Func<int, int, int>, int, int, int, int, int>("WP Direction", pan.panWPDir, 20, 12, panWPDir_en_ADDR, panWPDir_x_ADDR, panWPDir_y_ADDR);
-            panelItems[a++] = new Tuple<string, Func<int, int, int>, int, int, int, int, int>("WP Distance", pan.panWPDis, 1, 11, panWPDis_en_ADDR, panWPDis_x_ADDR, panWPDis_y_ADDR);
-            // rssi
-
-            // third 8
-            panelItems[a++] = new Tuple<string, Func<int, int, int>, int, int, int, int, int>("Altitude", pan.panAlt, 22, 3, panAlt_en_ADDR, panAlt_x_ADDR, panAlt_y_ADDR);
-            panelItems[a++] = new Tuple<string, Func<int, int, int>, int, int, int, int, int>("Home Altitude", pan.panHomeAlt, 22, 2, panHomeAlt_en_ADDR, panHomeAlt_x_ADDR, panHomeAlt_y_ADDR);
-            panelItems[a++] = new Tuple<string, Func<int, int, int>, int, int, int, int, int>("Vertical Speed", pan.panClimb, 1, 8, panClimb_en_ADDR, panClimb_x_ADDR, panClimb_y_ADDR);
-            panelItems[a++] = new Tuple<string, Func<int, int, int>, int, int, int, int, int>("Battery Percent", pan.panBatteryPercent, 14, 15, panBatteryPercent_en_ADDR, panBatteryPercent_x_ADDR, panBatteryPercent_y_ADDR);
-
-            panelItems[a++] = new Tuple<string, Func<int, int, int>, int, int, int, int, int>("Current", pan.panCur_A, 14, 14, panCur_A_en_ADDR, panCur_A_x_ADDR, panCur_A_y_ADDR);
-
-            panelItems[a++] = new Tuple<string, Func<int, int, int>, int, int, int, int, int>("Velocity", pan.panVel, 1, 2, panVel_en_ADDR, panVel_x_ADDR, panVel_y_ADDR);
             panelItems[a++] = new Tuple<string, Func<int, int, int>, int, int, int, int, int>("Air Speed", pan.panAirSpeed, 1, 1, panAirSpeed_en_ADDR, panAirSpeed_x_ADDR, panAirSpeed_y_ADDR);
-            panelItems[a++] = new Tuple<string, Func<int, int, int>, int, int, int, int, int>("Throttle", pan.panThr, 1, 3, panThr_en_ADDR, panThr_x_ADDR, panThr_y_ADDR);
-            panelItems[a++] = new Tuple<string, Func<int, int, int>, int, int, int, int, int>("Flight Mode", pan.panFlightMode, 1, 13, panFMod_en_ADDR, panFMod_x_ADDR, panFMod_y_ADDR);
+            panelItems[a++] = new Tuple<string, Func<int, int, int>, int, int, int, int, int>("Altitude", pan.panAlt, 23, 2, panAlt_en_ADDR, panAlt_x_ADDR, panAlt_y_ADDR);
+            panelItems[a++] = new Tuple<string, Func<int, int, int>, int, int, int, int, int>("Battery A", pan.panBatt_A, 1, 14, panBatt_A_en_ADDR, panBatt_A_x_ADDR, panBatt_A_y_ADDR);
+            panelItems[a++] = new Tuple<string, Func<int, int, int>, int, int, int, int, int>("Battery Percent", pan.panBatteryPercent, 1, 13, panBatteryPercent_en_ADDR, panBatteryPercent_x_ADDR, panBatteryPercent_y_ADDR);
+            panelItems[a++] = new Tuple<string, Func<int, int, int>, int, int, int, int, int>("Call Sign", pan.panCALLSIGN, 1, 0, panCALLSIGN_en_ADDR, panCALLSIGN_x_ADDR, panCALLSIGN_y_ADDR);
+            panelItems[a++] = new Tuple<string, Func<int, int, int>, int, int, int, int, int>("Current", pan.panCur_A, 11, 14, panCur_A_en_ADDR, panCur_A_x_ADDR, panCur_A_y_ADDR);
+            panelItems[a++] = new Tuple<string, Func<int, int, int>, int, int, int, int, int>("Efficiency", pan.panEff, 11, 12, panEff_en_ADDR, panEff_x_ADDR, panEff_y_ADDR);
+            panelItems[a++] = new Tuple<string, Func<int, int, int>, int, int, int, int, int>("Flight Mode", pan.panFlightMode, 13, 1, panFMod_en_ADDR, panFMod_x_ADDR, panFMod_y_ADDR);
+            panelItems[a++] = new Tuple<string, Func<int, int, int>, int, int, int, int, int>("GPS Coord", pan.panGPS, 1, 14, panGPS_en_ADDR, panGPS_x_ADDR, panGPS_y_ADDR);
+            panelItems[a++] = new Tuple<string, Func<int, int, int>, int, int, int, int, int>("Heading Rose", pan.panRose, 20, 14, panRose_en_ADDR, panRose_x_ADDR, panRose_y_ADDR);
+            panelItems[a++] = new Tuple<string, Func<int, int, int>, int, int, int, int, int>("Heading", pan.panHeading, 24, 13, panHeading_en_ADDR, panHeading_x_ADDR, panHeading_y_ADDR);
+            panelItems[a++] = new Tuple<string, Func<int, int, int>, int, int, int, int, int>("Home Altitude", pan.panHomeAlt, 22, 3, panHomeAlt_en_ADDR, panHomeAlt_x_ADDR, panHomeAlt_y_ADDR);
+            panelItems[a++] = new Tuple<string, Func<int, int, int>, int, int, int, int, int>("Home Direction", pan.panHomeDir, 27, 8, panHomeDir_en_ADDR, panHomeDir_x_ADDR, panHomeDir_y_ADDR);
+            panelItems[a++] = new Tuple<string, Func<int, int, int>, int, int, int, int, int>("Home Distance", pan.panHomeDis, 23, 1, panHomeDis_en_ADDR, panHomeDis_x_ADDR, panHomeDis_y_ADDR);
             panelItems[a++] = new Tuple<string, Func<int, int, int>, int, int, int, int, int>("Horizon", pan.panHorizon, 8, 6, panHorizon_en_ADDR, panHorizon_x_ADDR, panHorizon_y_ADDR);
-
-            panelItems[a++] = new Tuple<string, Func<int, int, int>, int, int, int, int, int>("Wind Speed", pan.panWindSpeed, 24, 7, panWindSpeed_en_ADDR, panWindSpeed_x_ADDR, panWindSpeed_y_ADDR);
-
-            panelItems[a++] = new Tuple<string, Func<int, int, int>, int, int, int, int, int>("Warnings", pan.panWarn, 9, 4, panWarn_en_ADDR, panWarn_x_ADDR, panWarn_y_ADDR);
-            panelItems[a++] = new Tuple<string, Func<int, int, int>, int, int, int, int, int>("Time", pan.panTime, 23, 4, panTime_en_ADDR, panTime_x_ADDR, panTime_y_ADDR);
-            panelItems[a++] = new Tuple<string, Func<int, int, int>, int, int, int, int, int>("RSSI", pan.panRSSI, 7, 13, panRSSI_en_ADDR, panRSSI_x_ADDR, panRSSI_y_ADDR);
-            panelItems[a++] = new Tuple<string, Func<int, int, int>, int, int, int, int, int>("Tune", pan.panTune, 1, 1, panTune_en_ADDR, panTune_x_ADDR, panTune_y_ADDR);
-            panelItems[a++] = new Tuple<string, Func<int, int, int>, int, int, int, int, int>("Efficiency", pan.panEff, 1, 11, panEff_en_ADDR, panEff_x_ADDR, panEff_y_ADDR);
-            panelItems[a++] = new Tuple<string, Func<int, int, int>, int, int, int, int, int>("Call Sign", pan.panCALLSIGN, 0, 0, panCALLSIGN_en_ADDR, panCALLSIGN_x_ADDR, panCALLSIGN_y_ADDR);
-            //            panelItems[a++] = new Tuple<string, Func<int, int, int>, int, int, int, int, int>("Channel Raw", pan.panCh, 1, 0, panCh_en_ADDR, panCh_x_ADDR, panCh_y_ADDR);
-            panelItems[a++] = new Tuple<string, Func<int, int, int>, int, int, int, int, int>("Temperature", pan.panTemp, 1, 11, panTemp_en_ADDR, panTemp_x_ADDR, panTemp_y_ADDR);
+            panelItems[a++] = new Tuple<string, Func<int, int, int>, int, int, int, int, int>("Pitch", pan.panPitch, 22, 10, panPitch_en_ADDR, panPitch_x_ADDR, panPitch_y_ADDR);
+            panelItems[a++] = new Tuple<string, Func<int, int, int>, int, int, int, int, int>("RSSI/LQ", pan.panRSSI, 1, 1, panRSSI_en_ADDR, panRSSI_x_ADDR, panRSSI_y_ADDR);
+            panelItems[a++] = new Tuple<string, Func<int, int, int>, int, int, int, int, int>("Real heading", pan.panCOG, 1, 10, panCOG_en_ADDR, panCOG_x_ADDR, panCOG_y_ADDR);
+            panelItems[a++] = new Tuple<string, Func<int, int, int>, int, int, int, int, int>("Roll", pan.panRoll, 11, 1, panRoll_en_ADDR, panRoll_x_ADDR, panRoll_y_ADDR);
+            panelItems[a++] = new Tuple<string, Func<int, int, int>, int, int, int, int, int>("Throttle", pan.panThr, 11, 13, panThr_en_ADDR, panThr_x_ADDR, panThr_y_ADDR);
+            panelItems[a++] = new Tuple<string, Func<int, int, int>, int, int, int, int, int>("Time", pan.panTime, 21, 13, panTime_en_ADDR, panTime_x_ADDR, panTime_y_ADDR);
             panelItems[a++] = new Tuple<string, Func<int, int, int>, int, int, int, int, int>("Trip Distance", pan.panDistance, 22, 2, panDistance_en_ADDR, panDistance_x_ADDR, panDistance_y_ADDR);
+            panelItems[a++] = new Tuple<string, Func<int, int, int>, int, int, int, int, int>("Tune", pan.panTune, 1, 1, panTune_en_ADDR, panTune_x_ADDR, panTune_y_ADDR);
+            panelItems[a++] = new Tuple<string, Func<int, int, int>, int, int, int, int, int>("Velocity", pan.panVel, 23, 3, panVel_en_ADDR, panVel_x_ADDR, panVel_y_ADDR);
+            panelItems[a++] = new Tuple<string, Func<int, int, int>, int, int, int, int, int>("Vertical Speed", pan.panClimb, 1, 7, panClimb_en_ADDR, panClimb_x_ADDR, panClimb_y_ADDR);
+            panelItems[a++] = new Tuple<string, Func<int, int, int>, int, int, int, int, int>("Visible Sats", pan.panGPSats, 3, 3, panGPSats_en_ADDR, panGPSats_x_ADDR, panGPSats_y_ADDR);
+            panelItems[a++] = new Tuple<string, Func<int, int, int>, int, int, int, int, int>("WP Distance", pan.panWPDis, 9, 14, panWPDis_en_ADDR, panWPDis_x_ADDR, panWPDis_y_ADDR);
+            panelItems[a++] = new Tuple<string, Func<int, int, int>, int, int, int, int, int>("Warnings", pan.panWarn, 9, 4, panWarn_en_ADDR, panWarn_x_ADDR, panWarn_y_ADDR);
+            panelItems[a++] = new Tuple<string, Func<int, int, int>, int, int, int, int, int>("Wind Speed", pan.panWindSpeed, 1, 14, panWindSpeed_en_ADDR, panWindSpeed_x_ADDR, panWindSpeed_y_ADDR);
 
             nosdfunctions = a;
-            //make backup in case EEPROM needs reset to deualt
+            //make backup in case EEPROM needs reset to default
             panelItems_default = panelItems;
 
             //Fill List of items in tabe number 1
@@ -230,113 +213,49 @@ namespace OSD
             {
                 if (thing != null)
                 {
-
-                    if (thing.Item1 == "Center")
-                    {
-                        TreeNode tn = LIST_items.Nodes.Add(thing.Item1, thing.Item1);
-                        tn.Checked = false;
-                    }
-
-                    else if (thing.Item1 == "Tune")
-                    {
-                        TreeNode tn = LIST_items.Nodes.Add(thing.Item1, thing.Item1);
-                        tn.Checked = false;
-                    }
-                    else if (thing.Item1 == "WP Distance")
-                    {
-                        TreeNode tn = LIST_items.Nodes.Add(thing.Item1, thing.Item1);
-                        tn.Checked = false;
-                    }
-
-                    else if (thing.Item1 == "Temperature")
-                    {
-                        TreeNode tn = LIST_items.Nodes.Add(thing.Item1, thing.Item1);
-                        tn.Checked = false;
-                    }
-
-
-                    else if (thing.Item1 == "Trip Distance")
-                    {
-                        TreeNode tn = LIST_items.Nodes.Add(thing.Item1, thing.Item1);
-                        tn.Checked = false;
-                    }
-
-
-                    else if (thing.Item1 == "Channel Raw")
-                    {
-                        TreeNode tn = LIST_items.Nodes.Add(thing.Item1, thing.Item1);
-                        tn.Checked = false;
-                    }
-                    else
-                    {
-                        TreeNode tn = LIST_items.Nodes.Add(thing.Item1, thing.Item1);
-                        tn.Checked = true;
-                    }
+                    string[] disabledItems = {"Center" ,"Tune", "WP Distance", "Trip Distance", "Channel Raw",
+                      "Air Speed", "Call Sign", "GPS Coord", "Heading", "Home Altitude", "Pitch",
+                      "Real heading", "Roll", "Vertical Speed", "Wind Speed", "Efficiency"};
+                    TreeNode tn = LIST_items.Nodes.Add(thing.Item1, thing.Item1);
+                    tn.Checked = !(disabledItems.Contains(thing.Item1));
                 }
             }
             LIST_items.CheckBoxes = true;
             LIST_items.Sort();
             startup = false;
 
-            //startup = true;
-            //List<string> instruments = new List<string>();
-            //LIST_items.Nodes.Clear();
-            //foreach (var tuple in this.panelItems)
-            //{
-            //    if ((tuple != null))
-            //    {
-            //        TreeNode tn = LIST_items.Nodes.Add(tuple.Item1, tuple.Item1);
-            //        tn.Checked = (tuple.Item3 == 1);
-            //    }
-            //}
             a = 0;
             startup = false;
-            // first 8
-            // Display name,printfunction,X,Y,ENaddress,Xaddress,Yaddress
-            //            panelItems2[a++] = new Tuple<string, Func<int, int, int>, int, int, int, int, int>("Center", pan.panCenter, 13, 8, panCenter_en_ADDR, panCenter_x_ADDR, panCenter_y_ADDR);
-            panelItems2[a++] = new Tuple<string, Func<int, int, int>, int, int, int, int, int>("Pitch", pan.panPitch, 22, 10, panPitch_en_ADDR, panPitch_x_ADDR, panPitch_y_ADDR);
-            panelItems2[a++] = new Tuple<string, Func<int, int, int>, int, int, int, int, int>("Roll", pan.panRoll, 11, 1, panRoll_en_ADDR, panRoll_x_ADDR, panRoll_y_ADDR);
-            panelItems2[a++] = new Tuple<string, Func<int, int, int>, int, int, int, int, int>("Battery A", pan.panBatt_A, 1, 13, panBatt_A_en_ADDR, panBatt_A_x_ADDR, panBatt_A_y_ADDR);
-            //items[a++] = new Tuple<string, Func<int, int, int>, int, int, int, int, int>("Battery B", pan.panBatt_B, 21, 3, panBatt_B_en_ADDR, panBatt_B_x_ADDR, panBatt_B_y_ADDR);
-            panelItems2[a++] = new Tuple<string, Func<int, int, int>, int, int, int, int, int>("Visible Sats", pan.panGPSats, 1, 9, panGPSats_en_ADDR, panGPSats_x_ADDR, panGPSats_y_ADDR);
-            panelItems2[a++] = new Tuple<string, Func<int, int, int>, int, int, int, int, int>("Real heading", pan.panCOG, 1, 10, panCOG_en_ADDR, panCOG_x_ADDR, panCOG_y_ADDR);
-            panelItems2[a++] = new Tuple<string, Func<int, int, int>, int, int, int, int, int>("GPS Coord", pan.panGPS, 1, 14, panGPS_en_ADDR, panGPS_x_ADDR, panGPS_y_ADDR);
 
-            //second 8
-            panelItems2[a++] = new Tuple<string, Func<int, int, int>, int, int, int, int, int>("Heading Rose", pan.panRose, 21, 15, panRose_en_ADDR, panRose_x_ADDR, panRose_y_ADDR);
-            panelItems2[a++] = new Tuple<string, Func<int, int, int>, int, int, int, int, int>("Heading", pan.panHeading, 24, 13, panHeading_en_ADDR, panHeading_x_ADDR, panHeading_y_ADDR);
-            //            panelItems2[a++] = new Tuple<string, Func<int, int, int>, int, int, int, int, int>("Heart Beat", pan.panMavBeat, 14, 15, panMavBeat_en_ADDR, panMavBeat_x_ADDR, panMavBeat_y_ADDR);
-            panelItems2[a++] = new Tuple<string, Func<int, int, int>, int, int, int, int, int>("Home Direction", pan.panHomeDir, 14, 1, panHomeDir_en_ADDR, panHomeDir_x_ADDR, panHomeDir_y_ADDR);
-            panelItems2[a++] = new Tuple<string, Func<int, int, int>, int, int, int, int, int>("Home Distance", pan.panHomeDis, 22, 1, panHomeDis_en_ADDR, panHomeDis_x_ADDR, panHomeDis_y_ADDR);
-            //            panelItems2[a++] = new Tuple<string, Func<int, int, int>, int, int, int, int, int>("WP Direction", pan.panWPDir, 20, 12, panWPDir_en_ADDR, panWPDir_x_ADDR, panWPDir_y_ADDR);
-            panelItems2[a++] = new Tuple<string, Func<int, int, int>, int, int, int, int, int>("WP Distance", pan.panWPDis, 9, 14, panWPDis_en_ADDR, panWPDis_x_ADDR, panWPDis_y_ADDR);
-            // rssi
-
-            // third 8
-            panelItems2[a++] = new Tuple<string, Func<int, int, int>, int, int, int, int, int>("Altitude", pan.panAlt, 22, 4, panAlt_en_ADDR, panAlt_x_ADDR, panAlt_y_ADDR);
-            panelItems2[a++] = new Tuple<string, Func<int, int, int>, int, int, int, int, int>("Home Altitude", pan.panHomeAlt, 22, 3, panHomeAlt_en_ADDR, panHomeAlt_x_ADDR, panHomeAlt_y_ADDR);
-            panelItems2[a++] = new Tuple<string, Func<int, int, int>, int, int, int, int, int>("Vertical Speed", pan.panClimb, 1, 7, panClimb_en_ADDR, panClimb_x_ADDR, panClimb_y_ADDR);
-            panelItems2[a++] = new Tuple<string, Func<int, int, int>, int, int, int, int, int>("Battery Percent", pan.panBatteryPercent, 22, 13, panBatteryPercent_en_ADDR, panBatteryPercent_x_ADDR, panBatteryPercent_y_ADDR);
-
-            panelItems2[a++] = new Tuple<string, Func<int, int, int>, int, int, int, int, int>("Current", pan.panCur_A, 1, 12, panCur_A_en_ADDR, panCur_A_x_ADDR, panCur_A_y_ADDR);
-
-            panelItems2[a++] = new Tuple<string, Func<int, int, int>, int, int, int, int, int>("Velocity", pan.panVel, 1, 2, panVel_en_ADDR, panVel_x_ADDR, panVel_y_ADDR);
             panelItems2[a++] = new Tuple<string, Func<int, int, int>, int, int, int, int, int>("Air Speed", pan.panAirSpeed, 1, 1, panAirSpeed_en_ADDR, panAirSpeed_x_ADDR, panAirSpeed_y_ADDR);
-            panelItems2[a++] = new Tuple<string, Func<int, int, int>, int, int, int, int, int>("Throttle", pan.panThr, 1, 3, panThr_en_ADDR, panThr_x_ADDR, panThr_y_ADDR);
-            panelItems2[a++] = new Tuple<string, Func<int, int, int>, int, int, int, int, int>("Flight Mode", pan.panFlightMode, 1, 13, panFMod_en_ADDR, panFMod_x_ADDR, panFMod_y_ADDR);
-            panelItems2[a++] = new Tuple<string, Func<int, int, int>, int, int, int, int, int>("Horizon", pan.panHorizon, 8, 6, panHorizon_en_ADDR, panHorizon_x_ADDR, panHorizon_y_ADDR);
-
-            panelItems2[a++] = new Tuple<string, Func<int, int, int>, int, int, int, int, int>("Wind Speed", pan.panWindSpeed, 1, 14, panWindSpeed_en_ADDR, panWindSpeed_x_ADDR, panWindSpeed_y_ADDR);
-
-            panelItems2[a++] = new Tuple<string, Func<int, int, int>, int, int, int, int, int>("Warnings", pan.panWarn, 9, 4, panWarn_en_ADDR, panWarn_x_ADDR, panWarn_y_ADDR);
-            panelItems2[a++] = new Tuple<string, Func<int, int, int>, int, int, int, int, int>("Time", pan.panTime, 22, 4, panTime_en_ADDR, panTime_x_ADDR, panTime_y_ADDR);
-            panelItems2[a++] = new Tuple<string, Func<int, int, int>, int, int, int, int, int>("RSSI", pan.panRSSI, 12, 13, panRSSI_en_ADDR, panRSSI_x_ADDR, panRSSI_y_ADDR);
-            panelItems2[a++] = new Tuple<string, Func<int, int, int>, int, int, int, int, int>("Tune", pan.panTune, 1, 1, panTune_en_ADDR, panTune_x_ADDR, panTune_y_ADDR);
-            panelItems2[a++] = new Tuple<string, Func<int, int, int>, int, int, int, int, int>("Efficiency", pan.panEff, 1, 3, panEff_en_ADDR, panEff_x_ADDR, panEff_y_ADDR);
+            panelItems2[a++] = new Tuple<string, Func<int, int, int>, int, int, int, int, int>("Altitude", pan.panAlt, 23, 2, panAlt_en_ADDR, panAlt_x_ADDR, panAlt_y_ADDR);
+            panelItems2[a++] = new Tuple<string, Func<int, int, int>, int, int, int, int, int>("Battery A", pan.panBatt_A, 1, 14, panBatt_A_en_ADDR, panBatt_A_x_ADDR, panBatt_A_y_ADDR);
+            panelItems2[a++] = new Tuple<string, Func<int, int, int>, int, int, int, int, int>("Battery Percent", pan.panBatteryPercent, 1, 13, panBatteryPercent_en_ADDR, panBatteryPercent_x_ADDR, panBatteryPercent_y_ADDR);
             panelItems2[a++] = new Tuple<string, Func<int, int, int>, int, int, int, int, int>("Call Sign", pan.panCALLSIGN, 1, 0, panCALLSIGN_en_ADDR, panCALLSIGN_x_ADDR, panCALLSIGN_y_ADDR);
-            //            panelItems2[a++] = new Tuple<string, Func<int, int, int>, int, int, int, int, int>("Channel Raw", pan.panCh, 1, 0, panCh_en_ADDR, panCh_x_ADDR, panCh_y_ADDR);
-            panelItems2[a++] = new Tuple<string, Func<int, int, int>, int, int, int, int, int>("Temperature", pan.panTemp, 22, 14, panTemp_en_ADDR, panTemp_x_ADDR, panTemp_y_ADDR);
+            panelItems2[a++] = new Tuple<string, Func<int, int, int>, int, int, int, int, int>("Current", pan.panCur_A, 11, 14, panCur_A_en_ADDR, panCur_A_x_ADDR, panCur_A_y_ADDR);
+            panelItems2[a++] = new Tuple<string, Func<int, int, int>, int, int, int, int, int>("Efficiency", pan.panEff, 11, 12, panEff_en_ADDR, panEff_x_ADDR, panEff_y_ADDR);
+            panelItems2[a++] = new Tuple<string, Func<int, int, int>, int, int, int, int, int>("Flight Mode", pan.panFlightMode, 13, 1, panFMod_en_ADDR, panFMod_x_ADDR, panFMod_y_ADDR);
+            panelItems2[a++] = new Tuple<string, Func<int, int, int>, int, int, int, int, int>("GPS Coord", pan.panGPS, 1, 14, panGPS_en_ADDR, panGPS_x_ADDR, panGPS_y_ADDR);
+            panelItems2[a++] = new Tuple<string, Func<int, int, int>, int, int, int, int, int>("Heading Rose", pan.panRose, 20, 14, panRose_en_ADDR, panRose_x_ADDR, panRose_y_ADDR);
+            panelItems2[a++] = new Tuple<string, Func<int, int, int>, int, int, int, int, int>("Heading", pan.panHeading, 24, 13, panHeading_en_ADDR, panHeading_x_ADDR, panHeading_y_ADDR);
+            panelItems2[a++] = new Tuple<string, Func<int, int, int>, int, int, int, int, int>("Home Altitude", pan.panHomeAlt, 22, 3, panHomeAlt_en_ADDR, panHomeAlt_x_ADDR, panHomeAlt_y_ADDR);
+            panelItems2[a++] = new Tuple<string, Func<int, int, int>, int, int, int, int, int>("Home Direction", pan.panHomeDir, 27, 8, panHomeDir_en_ADDR, panHomeDir_x_ADDR, panHomeDir_y_ADDR);
+            panelItems2[a++] = new Tuple<string, Func<int, int, int>, int, int, int, int, int>("Home Distance", pan.panHomeDis, 23, 1, panHomeDis_en_ADDR, panHomeDis_x_ADDR, panHomeDis_y_ADDR);
+            panelItems2[a++] = new Tuple<string, Func<int, int, int>, int, int, int, int, int>("Horizon", pan.panHorizon, 8, 6, panHorizon_en_ADDR, panHorizon_x_ADDR, panHorizon_y_ADDR);
+            panelItems2[a++] = new Tuple<string, Func<int, int, int>, int, int, int, int, int>("Pitch", pan.panPitch, 22, 10, panPitch_en_ADDR, panPitch_x_ADDR, panPitch_y_ADDR);
+            panelItems2[a++] = new Tuple<string, Func<int, int, int>, int, int, int, int, int>("RSSI/LQ", pan.panRSSI, 1, 1, panRSSI_en_ADDR, panRSSI_x_ADDR, panRSSI_y_ADDR);
+            panelItems2[a++] = new Tuple<string, Func<int, int, int>, int, int, int, int, int>("Real heading", pan.panCOG, 1, 10, panCOG_en_ADDR, panCOG_x_ADDR, panCOG_y_ADDR);
+            panelItems2[a++] = new Tuple<string, Func<int, int, int>, int, int, int, int, int>("Roll", pan.panRoll, 11, 1, panRoll_en_ADDR, panRoll_x_ADDR, panRoll_y_ADDR);
+            panelItems2[a++] = new Tuple<string, Func<int, int, int>, int, int, int, int, int>("Throttle", pan.panThr, 11, 13, panThr_en_ADDR, panThr_x_ADDR, panThr_y_ADDR);
+            panelItems2[a++] = new Tuple<string, Func<int, int, int>, int, int, int, int, int>("Time", pan.panTime, 21, 13, panTime_en_ADDR, panTime_x_ADDR, panTime_y_ADDR);
             panelItems2[a++] = new Tuple<string, Func<int, int, int>, int, int, int, int, int>("Trip Distance", pan.panDistance, 22, 2, panDistance_en_ADDR, panDistance_x_ADDR, panDistance_y_ADDR);
+            panelItems2[a++] = new Tuple<string, Func<int, int, int>, int, int, int, int, int>("Tune", pan.panTune, 1, 1, panTune_en_ADDR, panTune_x_ADDR, panTune_y_ADDR);
+            panelItems2[a++] = new Tuple<string, Func<int, int, int>, int, int, int, int, int>("Velocity", pan.panVel, 23, 3, panVel_en_ADDR, panVel_x_ADDR, panVel_y_ADDR);
+            panelItems2[a++] = new Tuple<string, Func<int, int, int>, int, int, int, int, int>("Vertical Speed", pan.panClimb, 1, 7, panClimb_en_ADDR, panClimb_x_ADDR, panClimb_y_ADDR);
+            panelItems2[a++] = new Tuple<string, Func<int, int, int>, int, int, int, int, int>("Visible Sats", pan.panGPSats, 3, 3, panGPSats_en_ADDR, panGPSats_x_ADDR, panGPSats_y_ADDR);
+            panelItems2[a++] = new Tuple<string, Func<int, int, int>, int, int, int, int, int>("WP Distance", pan.panWPDis, 9, 14, panWPDis_en_ADDR, panWPDis_x_ADDR, panWPDis_y_ADDR);
+            panelItems2[a++] = new Tuple<string, Func<int, int, int>, int, int, int, int, int>("Warnings", pan.panWarn, 9, 4, panWarn_en_ADDR, panWarn_x_ADDR, panWarn_y_ADDR);
+            panelItems2[a++] = new Tuple<string, Func<int, int, int>, int, int, int, int, int>("Wind Speed", pan.panWindSpeed, 1, 14, panWindSpeed_en_ADDR, panWindSpeed_x_ADDR, panWindSpeed_y_ADDR);
 
             //make backup in case EEPROM needs reset to deualt
             panelItems2_default = panelItems2;
@@ -349,101 +268,12 @@ namespace OSD
             {
                 if (thing != null)
                 {
-
-                    if (thing.Item1 == "Center")
-                    {
-                        TreeNode tn = LIST_items2.Nodes.Add(thing.Item1, thing.Item1);
-                        tn.Checked = false;
-                    }
-
-                    else if (thing.Item1 == "Tune")
-                    {
-                        TreeNode tn = LIST_items2.Nodes.Add(thing.Item1, thing.Item1);
-                        tn.Checked = false;
-                    }
-
-                    else if (thing.Item1 == "Pitch")
-                    {
-                        TreeNode tn = LIST_items2.Nodes.Add(thing.Item1, thing.Item1);
-                        tn.Checked = false;
-                    }
-
-                    else if (thing.Item1 == "Roll")
-                    {
-                        TreeNode tn = LIST_items2.Nodes.Add(thing.Item1, thing.Item1);
-                        tn.Checked = false;
-                    }
-                    else if (thing.Item1 == "Battery A")
-                    {
-                        TreeNode tn = LIST_items2.Nodes.Add(thing.Item1, thing.Item1);
-                        tn.Checked = false;
-                    }
-                    else if (thing.Item1 == "Visible Sats")
-                    {
-                        TreeNode tn = LIST_items2.Nodes.Add(thing.Item1, thing.Item1);
-                        tn.Checked = false;
-                    }
-                    else if (thing.Item1 == "GPS Coord")
-                    {
-                        TreeNode tn = LIST_items2.Nodes.Add(thing.Item1, thing.Item1);
-                        tn.Checked = false;
-                    }
-                    else if (thing.Item1 == "GPS Lock")
-                    {
-                        TreeNode tn = LIST_items2.Nodes.Add(thing.Item1, thing.Item1);
-                        tn.Checked = false;
-                    }
-                    else if (thing.Item1 == "Heading")
-                    {
-                        TreeNode tn = LIST_items2.Nodes.Add(thing.Item1, thing.Item1);
-                        tn.Checked = false;
-                    }
-                    else if (thing.Item1 == "Altitude")
-                    {
-                        TreeNode tn = LIST_items2.Nodes.Add(thing.Item1, thing.Item1);
-                        tn.Checked = false;
-                    }
-                    else if (thing.Item1 == "Vertical Speed")
-                    {
-                        TreeNode tn = LIST_items2.Nodes.Add(thing.Item1, thing.Item1);
-                        tn.Checked = false;
-                    }
-                    else if (thing.Item1 == "Current")
-                    {
-                        TreeNode tn = LIST_items2.Nodes.Add(thing.Item1, thing.Item1);
-                        tn.Checked = false;
-                    }
-                    else if (thing.Item1 == "Horizon")
-                    {
-                        TreeNode tn = LIST_items2.Nodes.Add(thing.Item1, thing.Item1);
-                        tn.Checked = false;
-                    }
-
-                    else if (thing.Item1 == "Tune")
-                    {
-                        TreeNode tn = LIST_items2.Nodes.Add(thing.Item1, thing.Item1);
-                        tn.Checked = false;
-                    }
-                    else if (thing.Item1 == "Efficiency")
-                    {
-                        TreeNode tn = LIST_items2.Nodes.Add(thing.Item1, thing.Item1);
-                        tn.Checked = false;
-                    }
-                    else if (thing.Item1 == "Call Sign")
-                    {
-                        TreeNode tn = LIST_items2.Nodes.Add(thing.Item1, thing.Item1);
-                        tn.Checked = false;
-                    }
-                    else if (thing.Item1 == "Warnings")
-                    {
-                        TreeNode tn = LIST_items2.Nodes.Add(thing.Item1, thing.Item1);
-                        tn.Checked = false;
-                    }
-                    else
-                    {
-                        TreeNode tn = LIST_items2.Nodes.Add(thing.Item1, thing.Item1);
-                        tn.Checked = true;
-                    }
+                    string[] disabledItems = {"Center" ,"Tune", "WP Distance", "Trip Distance", "Channel Raw",
+                      "Air Speed", "Call Sign", "GPS Coord", "Heading", "Home Altitude", "Pitch",
+                      "Real heading", "Roll", "Vertical Speed", "Wind Speed", "Efficiency", "Throttle",
+                      "Battery Percent", "Warnings", "Time", "RSSI/LQ", "Visible Sats", "Horizon" };
+                    TreeNode tn = LIST_items2.Nodes.Add(thing.Item1, thing.Item1);
+                    tn.Checked = !(disabledItems.Contains(thing.Item1));
                 }
             }
             LIST_items2.CheckBoxes = true;
@@ -455,10 +285,50 @@ namespace OSD
 
             //Setup configuration panel
             STALL_numeric.Value = pan.stall;
-            RSSI_numeric_min.Value = pan.rssipersent;
-            RSSI_numeric_max.Value = pan.rssical;
-            RSSI_RAW.Checked = Convert.ToBoolean(pan.rssiraw_on % 2);
-            cbxRSSIChannel.SelectedIndex = (int)(pan.rssiraw_on / 2);
+            RSSI_numeric_min.Value = pan.rssi_min;
+            RSSI_numeric_max.Value = pan.rssi_max;
+            switch(pan.rssi_source)
+            {
+                case 4:
+                    cbxRSSIChannel.SelectedIndex = 1;
+                    break;
+                case 5:
+                    cbxRSSIChannel.SelectedIndex = 2;
+                    break;
+                case 6:
+                    cbxRSSIChannel.SelectedIndex = 3;
+                    break;
+                case 7:
+                    cbxRSSIChannel.SelectedIndex = 4;
+                    break;
+                case 8:
+                    cbxRSSIChannel.SelectedIndex = 5;
+                    break;
+                default:
+                    cbxRSSIChannel.SelectedIndex = 0;
+                    break;
+            }
+            switch(pan.lq_source)
+            {
+                case 4:
+                    cbxLQChannel.SelectedIndex = 1;
+                    break;
+                case 5:
+                    cbxLQChannel.SelectedIndex = 2;
+                    break;
+                case 6:
+                    cbxLQChannel.SelectedIndex = 3;
+                    break;
+                case 7:
+                    cbxLQChannel.SelectedIndex = 4;
+                    break;
+                case 8:
+                    cbxLQChannel.SelectedIndex = 5;
+                    break;
+                default:
+                    cbxLQChannel.SelectedIndex = 0;
+                    break;
+            }
 
             OVERSPEED_numeric.Value = pan.overspeed;
 
@@ -490,7 +360,11 @@ namespace OSD
 
             MINVOLT_numeric.Value = Convert.ToDecimal(pan.battv) / Convert.ToDecimal(10.0);
 
-            if (pan.ch_toggle >= toggle_offset && pan.ch_toggle < 9) ONOFF_combo.SelectedIndex = pan.ch_toggle - toggle_offset;
+            if (pan.ch_toggle >= toggle_offset && pan.ch_toggle < 9)
+            {
+                MessageBox.Show("a" + toggle_offset + "-" + pan.ch_toggle);
+                ONOFF_combo.SelectedIndex = pan.ch_toggle - toggle_offset;
+            }
             else ONOFF_combo.SelectedIndex = 0; //reject garbage from the red file
 
             CHK_pal.Checked = Convert.ToBoolean(pan.pal_ntsc);
@@ -1142,7 +1016,7 @@ namespace OSD
             TabPage current = PANEL_tabs.SelectedTab;
             if (current.Text == "Panel 1")
             {
-                //First Panel 
+                //First Panel
                 List<TreeNode> AllNodes = new List<TreeNode>();
                 foreach (TreeNode tn in LIST_items.Nodes)
                 {
@@ -1172,7 +1046,7 @@ namespace OSD
             }
             else if (current.Text == "Panel 2")
             {
-                //Second Panel 
+                //Second Panel
                 List<TreeNode> AllNodes = new List<TreeNode>();
                 foreach (TreeNode tn in LIST_items2.Nodes)
                 {
@@ -1225,9 +1099,13 @@ namespace OSD
                 eeprom[stall_ADDR] = pan.stall;
                 eeprom[battv_ADDR] = pan.battv;
 
-                eeprom[OSD_RSSI_HIGH_ADDR] = pan.rssical;
-                eeprom[OSD_RSSI_LOW_ADDR] = pan.rssipersent;
-                eeprom[OSD_RSSI_RAW_ADDR] = pan.rssiraw_on;
+                eeprom[OSD_RSSI_HIGH_ADDR] = pan.rssi_max;
+                eeprom[OSD_RSSI_LOW_ADDR] = pan.rssi_min;
+                eeprom[OSD_RSSI_RAW_ADDR] = pan.rssi_source;
+                eeprom[OSD_LQ_HIGH_ADDR] = pan.lq_max;
+                eeprom[OSD_LQ_LOW_ADDR] = pan.lq_min;
+                eeprom[OSD_LQ_RAW_ADDR] = pan.lq_source;
+                eeprom[OSD_LQ_WARN_ADDR] = pan.lq_warn_level;
 
                 eeprom[AUTO_SCREEN_SWITCH_ADD] = pan.auto_screen_switch;
                 eeprom[OSD_Toggle_ADDR] = pan.ch_toggle;
@@ -1312,7 +1190,7 @@ namespace OSD
                     {
                         for (int i = 0; i < 10; i++)
                         { //try to upload two times if it fail
-                            spupload_flag = sp.upload(eeprom, (short)SIGN_MSL_ON_ADDR, (short)((OSD_CALL_SIGN_ADDR + OSD_CALL_SIGN_TOTAL) - SIGN_MSL_ON_ADDR + 1), (short)SIGN_MSL_ON_ADDR);
+                            spupload_flag = sp.upload(eeprom, (short)SIGN_MSL_ON_ADDR, (short)(OSD_LQ_WARN_ADDR - SIGN_MSL_ON_ADDR + 1), (short)SIGN_MSL_ON_ADDR);
                             if (!spupload_flag)
                             {
                                 if (sp.keepalive()) Console.WriteLine("keepalive successful (iter " + i + ")");
@@ -1343,7 +1221,7 @@ namespace OSD
         {
             toolStripProgressBar1.Style = ProgressBarStyle.Continuous;
             this.toolStripStatusLabel1.Text = "";
-            //First Panel 
+            //First Panel
             List<TreeNode> AllNodes = new List<TreeNode>();
             foreach (TreeNode tn in LIST_items.Nodes)
             {
@@ -1371,7 +1249,7 @@ namespace OSD
                     }
                 }
             }
-            //Second Panel 
+            //Second Panel
             AllNodes = new List<TreeNode>();
             foreach (TreeNode tn in LIST_items2.Nodes)
             {
@@ -1409,9 +1287,13 @@ namespace OSD
             eeprom[stall_ADDR] = pan.stall;
             eeprom[battv_ADDR] = pan.battv;
 
-            eeprom[OSD_RSSI_HIGH_ADDR] = pan.rssical;
-            eeprom[OSD_RSSI_LOW_ADDR] = pan.rssipersent;
-            eeprom[OSD_RSSI_RAW_ADDR] = pan.rssiraw_on;
+            eeprom[OSD_RSSI_HIGH_ADDR] = pan.rssi_max;
+            eeprom[OSD_RSSI_LOW_ADDR] = pan.rssi_min;
+            eeprom[OSD_RSSI_RAW_ADDR] = pan.rssi_source;
+            eeprom[OSD_LQ_HIGH_ADDR] = pan.lq_max;
+            eeprom[OSD_LQ_LOW_ADDR] = pan.lq_min;
+            eeprom[OSD_LQ_RAW_ADDR] = pan.lq_source;
+            eeprom[OSD_LQ_WARN_ADDR] = pan.lq_warn_level;
 
             eeprom[AUTO_SCREEN_SWITCH_ADD] = pan.auto_screen_switch;
             eeprom[OSD_Toggle_ADDR] = pan.ch_toggle;
@@ -1611,9 +1493,6 @@ namespace OSD
         const int panCh_en_ADDR = 206;
         const int panCh_x_ADDR = 208;
         const int panCh_y_ADDR = 210;
-        const int panTemp_en_ADDR = 212;
-        const int panTemp_x_ADDR = 214;
-        const int panTemp_y_ADDR = 216;
         const int panDistance_en_ADDR = 224;
         const int panDistance_x_ADDR = 226;
         const int panDistance_y_ADDR = 228;
@@ -1648,12 +1527,18 @@ namespace OSD
         const int OSD_CALL_SIGN_ADDR = 920;
         const int OSD_CALL_SIGN_TOTAL = 8;
 
-        const int FW_VERSION1_ADDR = 930;
-        const int FW_VERSION2_ADDR = 932;
-        const int FW_VERSION3_ADDR = 934;
-        const int CS_VERSION1_ADDR = 936;
-        const int CS_VERSION2_ADDR = 938;
-        const int CS_VERSION3_ADDR = 940;
+        const int OSD_LQ_HIGH_ADDR = 930;
+        const int OSD_LQ_LOW_ADDR = 932;
+        const int OSD_LQ_RAW_ADDR = 934;
+        const int OSD_LQ_WARN_ADDR = 936;
+
+        const int FW_VERSION1_ADDR = 940;
+        const int FW_VERSION2_ADDR = 942;
+        const int FW_VERSION3_ADDR = 944;
+        const int CS_VERSION1_ADDR = 946;
+        const int CS_VERSION2_ADDR = 948;
+        const int CS_VERSION3_ADDR = 950;
+
 
         const int CHK_VERSION = 1010;
 
@@ -1724,7 +1609,7 @@ namespace OSD
 
             if (!fail)
             {
-                lblLatestCharsetUploaded.Text = "Last charset uploaded to OSD: " + tempEeprom[CS_VERSION1_ADDR].ToString() + "." + tempEeprom[CS_VERSION1_ADDR + 1].ToString() + "." + tempEeprom[CS_VERSION1_ADDR + 2].ToString(); 
+                lblLatestCharsetUploaded.Text = "Last charset uploaded to OSD: " + tempEeprom[CS_VERSION1_ADDR].ToString() + "." + tempEeprom[CS_VERSION1_ADDR + 1].ToString() + "." + tempEeprom[CS_VERSION1_ADDR + 2].ToString();
             }
         }
 
@@ -1839,6 +1724,8 @@ namespace OSD
             if (eeprom[CHK_VERSION] != VER)
             { // no match
                 MessageBox.Show("The EEPROM mapping is outdated! An automatic update will start.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Got " + eeprom[CHK_VERSION] + " expected " + VER);
+
                 BUT_ResetOSD_EEPROM(); //write defaults
                 MessageBox.Show("EEPROM mapping updated!", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
@@ -1948,13 +1835,15 @@ namespace OSD
             pan.battv = eeprom[battv_ADDR];
             MINVOLT_numeric.Value = Convert.ToDecimal(pan.battv) / Convert.ToDecimal(10.0);
 
-            pan.rssical = eeprom[OSD_RSSI_HIGH_ADDR];
-            //RSSI_numeric_max.Value = pan.rssical;
+            pan.rssi_min = eeprom[OSD_RSSI_LOW_ADDR];
+            pan.rssi_max = eeprom[OSD_RSSI_HIGH_ADDR];
+            pan.rssi_source = eeprom[OSD_RSSI_RAW_ADDR];
 
-            pan.rssipersent = eeprom[OSD_RSSI_LOW_ADDR];
-            //RSSI_numeric_min.Value = pan.rssipersent;
+            pan.lq_min = eeprom[OSD_LQ_LOW_ADDR];
+            pan.lq_max = eeprom[OSD_LQ_HIGH_ADDR];
+            pan.lq_source = eeprom[OSD_LQ_RAW_ADDR];
+            pan.lq_warn_level = eeprom[OSD_LQ_WARN_ADDR];
 
-            pan.rssiraw_on = eeprom[OSD_RSSI_RAW_ADDR];
 
             updatingRSSI = true;
             RSSI_numeric_min.Minimum = 0;
@@ -1963,11 +1852,11 @@ namespace OSD
             RSSI_numeric_max.Maximum = 2000;
             RSSI_numeric_min.Value = 0;
             RSSI_numeric_max.Value = 0;
-            RSSI_RAW.Checked = Convert.ToBoolean(pan.rssiraw_on % 2);
-            if ((int)(pan.rssiraw_on / 2) == 0)
+
+            if (pan.rssi_source == 0)
             {
-                RSSI_numeric_min.Value = pan.rssipersent;
-                RSSI_numeric_max.Value = pan.rssical;
+                RSSI_numeric_min.Value = pan.rssi_min;
+                RSSI_numeric_max.Value = pan.rssi_max;
                 RSSI_numeric_min.Minimum = 0;
                 RSSI_numeric_min.Maximum = 255;
                 RSSI_numeric_max.Minimum = 0;
@@ -1975,18 +1864,61 @@ namespace OSD
             }
             else
             {
-                RSSI_numeric_min.Value = pan.rssipersent * 10;
-                RSSI_numeric_max.Value = pan.rssical * 10;
+                RSSI_numeric_min.Value = pan.rssi_min * 10;
+                RSSI_numeric_max.Value = pan.rssi_max * 10;
                 RSSI_numeric_min.Minimum = 900;
                 RSSI_numeric_min.Maximum = 2000;
                 RSSI_numeric_max.Minimum = 900;
                 RSSI_numeric_max.Maximum = 2000;
             }
-            if(pan.rssiraw_on <= 1)
-                cbxRSSIChannel.SelectedIndex = 0;
-            else
-                cbxRSSIChannel.SelectedIndex = 1;
+            switch (pan.rssi_source)
+            {
+                case 4:
+                    cbxRSSIChannel.SelectedIndex = 1;
+                    break;
+                case 5:
+                    cbxRSSIChannel.SelectedIndex = 2;
+                    break;
+                case 6:
+                    cbxRSSIChannel.SelectedIndex = 3;
+                    break;
+                case 7:
+                    cbxRSSIChannel.SelectedIndex = 4;
+                    break;
+                case 8:
+                    cbxRSSIChannel.SelectedIndex = 5;
+                    break;
+                default:
+                    cbxRSSIChannel.SelectedIndex = 0;
+                    break;
+            }
             updatingRSSI = false;
+
+            LQ_numeric_min.Value = pan.lq_min * 10;
+            LQ_numeric_max.Value = pan.lq_max * 10;
+
+            switch(pan.lq_source)
+            {
+                case 4:
+                    cbxLQChannel.SelectedIndex = 1;
+                    break;
+                case 5:
+                    cbxLQChannel.SelectedIndex = 2;
+                    break;
+                case 6:
+                    cbxLQChannel.SelectedIndex = 3;
+                    break;
+                case 7:
+                    cbxLQChannel.SelectedIndex = 4;
+                    break;
+                case 8:
+                    cbxLQChannel.SelectedIndex = 5;
+                    break;
+                default:
+                    cbxLQChannel.SelectedIndex = 0;
+                    break;
+            }
+            LQWARN_numeric.Value = pan.lq_warn_level;
 
             pan.ch_toggle = eeprom[OSD_Toggle_ADDR];
             if (pan.ch_toggle >= toggle_offset && pan.ch_toggle < 9) ONOFF_combo.SelectedIndex = pan.ch_toggle - toggle_offset;
@@ -2174,16 +2106,16 @@ namespace OSD
                                     sw.WriteLine("{0}\t{1}\t{2}\t{3}", item.Item1, item.Item3, item.Item4, tnArray[0].Checked.ToString());
                             }
                         }
-                        //Config 
+                        //Config
                         sw.WriteLine("{0}", "Configuration");
                         sw.WriteLine("{0}\t{1}", "Model Type", (byte)(ModelType)cbxModelType.SelectedItem); //We're just saving what's in the config screen, not the eeprom model type
                         sw.WriteLine("{0}\t{1}", "Units", pan.converts);
                         sw.WriteLine("{0}\t{1}", "Overspeed", pan.overspeed);
                         sw.WriteLine("{0}\t{1}", "Stall", pan.stall);
                         sw.WriteLine("{0}\t{1}", "Battery", pan.battv);
-                        sw.WriteLine("{0}\t{1}", "RSSI High", pan.rssical);
-                        sw.WriteLine("{0}\t{1}", "RSSI Low", pan.rssipersent);
-                        sw.WriteLine("{0}\t{1}", "RSSI Enable Raw", pan.rssiraw_on);
+                        sw.WriteLine("{0}\t{1}", "RSSI High", pan.rssi_max);
+                        sw.WriteLine("{0}\t{1}", "RSSI Low", pan.rssi_min);
+                        sw.WriteLine("{0}\t{1}", "RSSI Enable Raw", pan.rssi_source);
                         sw.WriteLine("{0}\t{1}", "Toggle Channel", pan.ch_toggle);
                         sw.WriteLine("{0}\t{1}", "Auto Screen Switch", pan.auto_screen_switch);
                         sw.WriteLine("{0}\t{1}", "Chanel Rotation Switching", pan.switch_mode);
@@ -2266,7 +2198,7 @@ namespace OSD
                                 }
                             }
                         }
-                        //Config 
+                        //Config
                         stringh = sr.ReadLine(); //
                         while (!sr.EndOfStream)
                         {
@@ -2275,9 +2207,9 @@ namespace OSD
                             else if (strings[0] == "Overspeed") pan.overspeed = byte.Parse(strings[1]);
                             else if (strings[0] == "Stall") pan.stall = byte.Parse(strings[1]);
                             else if (strings[0] == "Battery") pan.battv = byte.Parse(strings[1]);
-                            else if (strings[0] == "RSSI High") pan.rssical = byte.Parse(strings[1]);
-                            else if (strings[0] == "RSSI Low") pan.rssipersent = byte.Parse(strings[1]);
-                            else if (strings[0] == "RSSI Enable Raw") pan.rssiraw_on = byte.Parse(strings[1]);
+                            else if (strings[0] == "RSSI High") pan.rssi_max = byte.Parse(strings[1]);
+                            else if (strings[0] == "RSSI Low") pan.rssi_min = byte.Parse(strings[1]);
+                            else if (strings[0] == "RSSI Enable Raw") pan.rssi_source = byte.Parse(strings[1]);
                             else if (strings[0] == "Toggle Channel") pan.ch_toggle = byte.Parse(strings[1]);
                             else if (strings[0] == "Auto Screen Switch") pan.auto_screen_switch = byte.Parse(strings[1]);
                             else if (strings[0] == "Chanel Rotation Switching") pan.switch_mode = byte.Parse(strings[1]);
@@ -2318,8 +2250,8 @@ namespace OSD
                         STALL_numeric.Value = pan.stall;
                         MINVOLT_numeric.Value = Convert.ToDecimal(pan.battv) / Convert.ToDecimal(10.0);
 
-                        //RSSI_numeric_max.Value = pan.rssical;
-                        //RSSI_numeric_min.Value = pan.rssipersent;
+                        //RSSI_numeric_max.Value = pan.rssi_max;
+                        //RSSI_numeric_min.Value = pan.rssi_min;
 
                         updatingRSSI = true;
                         RSSI_numeric_min.Minimum = 0;
@@ -2328,11 +2260,10 @@ namespace OSD
                         RSSI_numeric_max.Maximum = 2000;
                         RSSI_numeric_min.Value = 0;
                         RSSI_numeric_max.Value = 0;
-                        RSSI_RAW.Checked = Convert.ToBoolean(pan.rssiraw_on % 2);
-                        if ((int)(pan.rssiraw_on / 2) == 0)
+                        if (pan.rssi_source == 0)
                         {
-                            RSSI_numeric_min.Value = pan.rssipersent;
-                            RSSI_numeric_max.Value = pan.rssical;
+                            RSSI_numeric_min.Value = pan.rssi_min;
+                            RSSI_numeric_max.Value = pan.rssi_max;
                             RSSI_numeric_min.Minimum = 0;
                             RSSI_numeric_min.Maximum = 255;
                             RSSI_numeric_max.Minimum = 0;
@@ -2340,14 +2271,34 @@ namespace OSD
                         }
                         else
                         {
-                            RSSI_numeric_min.Value = pan.rssipersent * 10;
-                            RSSI_numeric_max.Value = pan.rssical * 10;
+                            RSSI_numeric_min.Value = pan.rssi_min * 10;
+                            RSSI_numeric_max.Value = pan.rssi_max * 10;
                             RSSI_numeric_min.Minimum = 900;
                             RSSI_numeric_min.Maximum = 2000;
                             RSSI_numeric_max.Minimum = 900;
                             RSSI_numeric_max.Maximum = 2000;
                         }
-                        cbxRSSIChannel.SelectedIndex = (int)(pan.rssiraw_on / 2);
+                        switch (pan.rssi_source)
+                        {
+                            case 4:
+                                cbxRSSIChannel.SelectedIndex = 1;
+                                break;
+                            case 5:
+                                cbxRSSIChannel.SelectedIndex = 2;
+                                break;
+                            case 6:
+                                cbxRSSIChannel.SelectedIndex = 3;
+                                break;
+                            case 7:
+                                cbxRSSIChannel.SelectedIndex = 4;
+                                break;
+                            case 8:
+                                cbxRSSIChannel.SelectedIndex = 5;
+                                break;
+                            default:
+                                cbxRSSIChannel.SelectedIndex = 0;
+                                break;
+                        }
 
                         if (pan.ch_toggle >= toggle_offset && pan.ch_toggle < 9) ONOFF_combo.SelectedIndex = pan.ch_toggle - toggle_offset;
                         else ONOFF_combo.SelectedIndex = 0; //reject garbage from the red file
@@ -2542,10 +2493,10 @@ namespace OSD
                         //    if (sp.IsOpen)
                         //        sp.Close();
 
-                        //    MessageBox.Show("Upload failed. Lost sync. Try using Arduino to upload instead",                                    
-                        //        "Error",                            
-                        //        MessageBoxButtons.OK,        
-                        //        MessageBoxIcon.Warning); 
+                        //    MessageBox.Show("Upload failed. Lost sync. Try using Arduino to upload instead",
+                        //        "Error",
+                        //        MessageBoxButtons.OK,
+                        //        MessageBoxIcon.Warning);
                         //}
                     }
                     catch (Exception ex)
@@ -2888,8 +2839,8 @@ namespace OSD
                     Int16 version1, version2, version3;
                     if(versionArray.Length > 2)
                     {
-                        if(Int16.TryParse(versionArray[0], out version1) && 
-                           Int16.TryParse(versionArray[1], out version2) && 
+                        if(Int16.TryParse(versionArray[0], out version1) &&
+                           Int16.TryParse(versionArray[1], out version2) &&
                            Int16.TryParse(versionArray[2], out version3))
                             fileVersion = version1.ToString().Substring(0,1).Trim() + version2.ToString().Substring(0,1).Trim() + version3.ToString().Substring(0,1).Trim();
                     }
@@ -2960,7 +2911,7 @@ namespace OSD
                     StreamReader sr2 = new StreamReader(br.BaseStream);
 
                     string device = sr2.ReadLine();
-                    
+
                     if (device != "MAX7456")
                     {
                         MessageBox.Show("Invalid MCM");
@@ -3009,8 +2960,8 @@ namespace OSD
                             }
 
                         }
-                        catch { 
-                            break; 
+                        catch {
+                            break;
                         }
 
                         Application.DoEvents();
@@ -3071,11 +3022,11 @@ namespace OSD
                 return;
             if (cbxRSSIChannel.SelectedIndex == 0)
             {
-                pan.rssipersent = (byte)RSSI_numeric_min.Value;
+                pan.rssi_min = (byte)RSSI_numeric_min.Value;
             }
             else
             {
-                pan.rssipersent = (byte)(RSSI_numeric_min.Value / 10);
+                pan.rssi_min = (byte)(RSSI_numeric_min.Value / 10);
             }
         }
 
@@ -3085,11 +3036,11 @@ namespace OSD
                 return;
             if (cbxRSSIChannel.SelectedIndex == 0)
             {
-                pan.rssical = (byte)RSSI_numeric_max.Value;
+                pan.rssi_max = (byte)RSSI_numeric_max.Value;
             }
             else
             {
-                pan.rssical = (byte)(RSSI_numeric_max.Value / 10);
+                pan.rssi_max = (byte)(RSSI_numeric_max.Value / 10);
             }
         }
 
@@ -3125,20 +3076,6 @@ namespace OSD
         private void ONOFF_combo_SelectedIndexChanged(object sender, EventArgs e)
         {
             pan.ch_toggle = (byte)(ONOFF_combo.SelectedIndex + toggle_offset);
-        }
-
-        private void checkBox2_CheckedChanged(object sender, EventArgs e)
-        {
-            switch (cbxRSSIChannel.SelectedIndex)
-            {
-                case 0:
-                    pan.rssiraw_on = 0;
-                    break;
-                case 1:
-                    pan.rssiraw_on = 8;
-                    break;
-            }
-            pan.rssiraw_on = Convert.ToByte(pan.rssiraw_on + Convert.ToInt32(RSSI_RAW.Checked));
         }
 
         private void TOGGLE_BEHChanged(object sender, EventArgs e)
@@ -3258,7 +3195,6 @@ namespace OSD
                     if ((node.Text == "Call Sign") ||
                         (node.Text == "RSSI") ||
                         (node.Text == "Flight Mode") ||
-                        (node.Text == "Temperature") ||
                         (node.Text == "Throttle") ||
                         (node.Text == "Time") ||
                         (node.Text == "Warnings"))
@@ -3370,7 +3306,6 @@ namespace OSD
                     if ((node.Text == "Call Sign") ||
                         (node.Text == "RSSI") ||
                         (node.Text == "Flight Mode") ||
-                        (node.Text == "Temperature") ||
                         (node.Text == "Throttle") ||
                         (node.Text == "Time") ||
                         (node.Text == "Warnings"))
@@ -3434,7 +3369,7 @@ namespace OSD
             }
         }
 
-        public ModelType modelType = ModelType.Plane; 
+        public ModelType modelType = ModelType.Plane;
         private void cbxModelType_SelectedIndexChanged(object sender, EventArgs e)
         {
             modelType = (ModelType)cbxModelType.SelectedItem;
@@ -3679,7 +3614,7 @@ namespace OSD
 
         private void cbxRSSIChannel_SelectedIndexChanged(object sender, EventArgs e)
         {
-            SetRSSIValues(); 
+            SetRSSIValues();
         }
 
         private void SetRSSIValues()
@@ -3696,12 +3631,12 @@ namespace OSD
                 lblRSSIMax.Text = "RSSI Max Value";
                 if (OldMax == 2000)
                 {
-                    //RSSI_numeric_min.Value = (pan.rssipersent * 10 - 1000) * 255 / 1000;
-                    //RSSI_numeric_max.Value = (pan.rssical * 10 - 1000) * 255 / 1000;
-                    RSSI_numeric_min.Value = (pan.rssipersent * 10 - 900) * 255 / 1100;
-                    RSSI_numeric_max.Value = (pan.rssical * 10 - 900) * 255 / 1100;
-                    //pan.rssipersent = (byte)((pan.rssipersent - 100) * 255 / 100);
-                    //pan.rssical = (byte)((pan.rssical - 100) * 255 / 100);
+                    //RSSI_numeric_min.Value = (pan.rssi_min * 10 - 1000) * 255 / 1000;
+                    //RSSI_numeric_max.Value = (pan.rssi_max * 10 - 1000) * 255 / 1000;
+                    RSSI_numeric_min.Value = (pan.rssi_min * 10 - 900) * 255 / 1100;
+                    RSSI_numeric_max.Value = (pan.rssi_max * 10 - 900) * 255 / 1100;
+                    //pan.rssi_min = (byte)((pan.rssi_min - 100) * 255 / 100);
+                    //pan.rssi_max = (byte)((pan.rssi_max - 100) * 255 / 100);
                 }
                 RSSI_numeric_min.Minimum = 0;
                 RSSI_numeric_min.Maximum = 255;
@@ -3714,29 +3649,40 @@ namespace OSD
                 lblRSSIMax.Text = "RSSI Max Value (pwm)";
                 if (OldMax == 255)
                 {
-                    //RSSI_numeric_min.Value = pan.rssipersent * 100 / 255 + 100;
-                    //RSSI_numeric_max.Value = pan.rssical * 100 / 255 + 100;
-                    RSSI_numeric_min.Value = (pan.rssipersent * 1100 / 255) + 900;
-                    RSSI_numeric_max.Value = (pan.rssical * 1100 / 255) + 900;
-                    //pan.rssipersent = (byte)(pan.rssipersent * 100 / 255 + 100);
-                    //pan.rssical = (byte)(pan.rssical * 100 / 255 + 100);
+                    //RSSI_numeric_min.Value = pan.rssi_min * 100 / 255 + 100;
+                    //RSSI_numeric_max.Value = pan.rssi_max * 100 / 255 + 100;
+                    RSSI_numeric_min.Value = (pan.rssi_min * 1100 / 255) + 900;
+                    RSSI_numeric_max.Value = (pan.rssi_max * 1100 / 255) + 900;
+                    //pan.rssi_min = (byte)(pan.rssi_min * 100 / 255 + 100);
+                    //pan.rssi_max = (byte)(pan.rssi_max * 100 / 255 + 100);
                 }
                 RSSI_numeric_min.Maximum = 2000;
                 RSSI_numeric_min.Minimum = 900;
                 RSSI_numeric_max.Maximum = 2000;
                 RSSI_numeric_max.Minimum = 900;
             }
-            
+
             switch (cbxRSSIChannel.SelectedIndex)
             {
                 case 0:
-                    pan.rssiraw_on = 0;
+                    pan.rssi_source = 0;
                     break;
                 case 1:
-                    pan.rssiraw_on = 8;
+                    pan.rssi_source = 4;
+                    break;
+                case 2:
+                    pan.rssi_source = 5;
+                    break;
+                case 3:
+                    pan.rssi_source = 6;
+                    break;
+                case 4:
+                    pan.rssi_source = 7;
+                    break;
+                case 5:
+                    pan.rssi_source = 8;
                     break;
             }
-            pan.rssiraw_on = Convert.ToByte(pan.rssiraw_on + Convert.ToInt32(RSSI_RAW.Checked));
         }
 
         private void presentCustomCharsetToolStripMenuItem_Click(object sender, EventArgs e)
@@ -4014,10 +3960,10 @@ namespace OSD
                     //    if (sp.IsOpen)
                     //        sp.Close();
 
-                    //    MessageBox.Show("Upload failed. Lost sync. Try using Arduino to upload instead",                                    
-                    //        "Error",                            
-                    //        MessageBoxButtons.OK,        
-                    //        MessageBoxIcon.Warning); 
+                    //    MessageBox.Show("Upload failed. Lost sync. Try using Arduino to upload instead",
+                    //        "Error",
+                    //        MessageBoxButtons.OK,
+                    //        MessageBoxIcon.Warning);
                     //}
                 }
                 catch (Exception ex)
@@ -4099,7 +4045,7 @@ namespace OSD
             }
 
             sp.Close();
-                
+
             //Setup configuration panel
             return modelType;
         }
@@ -4360,7 +4306,7 @@ namespace OSD
             if (modelType == ModelType.Unknown)
             {
                 if(MessageBox.Show("Unknown current fw." + Environment.NewLine +
-                                   "If you proceed you'll need to upload  the fw manually after charset upload." + Environment.NewLine + 
+                                   "If you proceed you'll need to upload  the fw manually after charset upload." + Environment.NewLine +
                                    "Do you want to proceed?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == System.Windows.Forms.DialogResult.No)
                     return;
             }
@@ -4369,7 +4315,7 @@ namespace OSD
             if (!GetLatestFW(modelType))
             {
                 if(MessageBox.Show("Unable to get latest fw from internet." + Environment.NewLine +
-                                   "If you proceed you'll need to upload the fw manually after charset upload." + Environment.NewLine + 
+                                   "If you proceed you'll need to upload the fw manually after charset upload." + Environment.NewLine +
                                    "Do you want to proceed?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == System.Windows.Forms.DialogResult.No)
                 return;
             }
@@ -4540,6 +4486,46 @@ namespace OSD
         private void cbxShowUpdateDialog_CheckedChanged(object sender, EventArgs e)
         {
             autoUpdate = !cbxShowUpdateDialog.Checked;
+        }
+
+        private void cbxLQChannel_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch(cbxLQChannel.SelectedIndex)
+            {
+                case 1:
+                    pan.lq_source = 4;
+                    break;
+                case 2:
+                    pan.lq_source = 5;
+                    break;
+                case 3:
+                    pan.lq_source = 6;
+                    break;
+                case 4:
+                    pan.lq_source = 7;
+                    break;
+                case 5:
+                    pan.lq_source = 8;
+                    break;
+                default:
+                    pan.lq_source = 0;
+                    break;
+            }
+        }
+
+        private void LQ_numeric_min_ValueChanged(object sender, EventArgs e)
+        {
+            pan.lq_min = (byte)(LQ_numeric_min.Value / 10);
+        }
+
+        private void LQ_numeric_max_ValueChanged(object sender, EventArgs e)
+        {
+            pan.lq_max = (byte)(LQ_numeric_max.Value / 10);
+        }
+
+        private void LQWARN_numeric_ValueChanged(object sender, EventArgs e)
+        {
+            pan.lq_warn_level = (byte)LQWARN_numeric.Value;
         }
     }
 }

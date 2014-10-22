@@ -147,3 +147,21 @@ D:\Documentos Miguel\minimosd-extra\trunk\Tools\OSD\obj\x86\Debug\OSD_Config.app
 D:\Documentos Miguel\minimosd-extra\trunk\Tools\OSD\obj\x86\Debug\OSD_Config.exe
 D:\Documentos Miguel\minimosd-extra\trunk\Tools\OSD\obj\x86\Debug\OSD_Config.pdb
 E:\Documents and Settings\vitorr\My Documents\minimosd-extra\trunk\Tools\OSD\obj\x86\Debug\OSD.UpdateAvailable.resources
+\\VBOXSVR\fpv\minimosd-extra\tools\OSD\bin\Debug\OSD_Config.exe.config
+\\VBOXSVR\fpv\minimosd-extra\tools\OSD\obj\x86\Debug\OSD_Config.exe
+\\VBOXSVR\fpv\minimosd-extra\tools\OSD\obj\x86\Debug\OSD_Config.pdb
+\\VBOXSVR\fpv\minimosd-extra\tools\OSD\obj\x86\Debug\OSD.AboutBox1.resources
+\\VBOXSVR\fpv\minimosd-extra\tools\OSD\obj\x86\Debug\OSD.OSD.resources
+\\VBOXSVR\fpv\minimosd-extra\tools\OSD\obj\x86\Debug\OSD.Properties.Resources.resources
+\\VBOXSVR\fpv\minimosd-extra\tools\OSD\obj\x86\Debug\OSD.UpdateAvailable.resources
+\\VBOXSVR\fpv\minimosd-extra\tools\OSD\obj\x86\Debug\OSD.csproj.GenerateResource.Cache
+\\VBOXSVR\fpv\minimosd-extra\tools\OSD\bin\Debug\vlcsnap-2012-01-28-07h46m04s95.png
+\\VBOXSVR\fpv\minimosd-extra\tools\OSD\bin\Debug\OSD_SA_v5.mcm
+\\VBOXSVR\fpv\minimosd-extra\tools\OSD\bin\Debug\OSD_Config.exe.manifest
+\\VBOXSVR\fpv\minimosd-extra\tools\OSD\bin\Debug\OSD_Config.application
+\\VBOXSVR\fpv\minimosd-extra\tools\OSD\bin\Debug\OSD_Config.exe
+\\VBOXSVR\fpv\minimosd-extra\tools\OSD\bin\Debug\OSD_Config.pdb
+\\VBOXSVR\fpv\minimosd-extra\tools\OSD\obj\x86\Debug\OSD_Config.TrustInfo.xml
+\\VBOXSVR\fpv\minimosd-extra\tools\OSD\obj\x86\Debug\OSD_Config.exe.manifest
+\\VBOXSVR\fpv\minimosd-extra\tools\OSD\obj\x86\Debug\OSD_Config.application
+\\VBOXSVR\fpv\minimosd-extra\tools\OSD\obj\x86\Debug\OSD.csprojResolveAssemblyReference.cache

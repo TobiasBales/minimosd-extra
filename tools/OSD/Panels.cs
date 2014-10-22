@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -53,18 +53,17 @@ namespace OSD
         public uint8_t cs_version1 = 0;
         public uint8_t cs_version2 = 0;
         public uint8_t cs_version3 = 0;
-        
+
         public uint8_t sign_air_speed = 0;
         public uint8_t sign_ground_speed = 0;
         public uint8_t sign_home_altitude = 0;
-        public uint8_t sign_msl_altitude = 0; 
+        public uint8_t sign_msl_altitude = 0;
 
-        public uint8_t overspeed = 40;
-        public uint8_t stall = 5;
-        public uint8_t battv = 101;                //Batery warning voltage - units Volt *10 
+        public uint8_t overspeed = 140;
+        public uint8_t stall = 25;
+        public uint8_t battv = 140;                //Batery warning voltage - units Volt *10
         public uint8_t converts = 0;                //1- Imperial; 0- Metric
 
-        private byte temperatureChar = 0x1B;
         private byte bigDistanceChar = 0x1B;
         private byte smallDistanceChar = 0x1B;
         private byte climbChar = 0x1A;
@@ -73,22 +72,17 @@ namespace OSD
 
         private float convertspeed = 3.6f;
         private float converth = 1.0f;
-        private float tempconv = 10;
-        private float tempconvAdd = 0;
         private float distconv = 1000;
 
         public void do_converts()
         {
             switch (converts)
-            { 
+            {
                 case 0:
                     convertspeed = 3.6f;
                     converth = 1.0f;
-                    tempconv = 10;
-                    tempconvAdd = 0;
                     distconv = 1000;
 
-                    temperatureChar = 0xBA;
                     bigDistanceChar = 0x1B;
                     climbChar = 0x1A;
                     velocityChar = 0x10;
@@ -98,10 +92,7 @@ namespace OSD
                 case 1:
                     convertspeed = 2.23f;
                     converth = 3.28f;
-                    tempconv = 18;
-                    tempconvAdd = 3200;
                     distconv = 5280;
-                    temperatureChar = 0xBB;
                     bigDistanceChar = 0x1C;
                     climbChar = 0x1E;
                     velocityChar = 0x19;
@@ -112,9 +103,9 @@ namespace OSD
         }
 
 
-        static float osd_vbat = 11.61f;                   // voltage in milivolt
+        static float osd_vbat = 14.91f;                   // voltage in milivolt
         static uint16_t osd_battery_remaining = 10;      // 0 to 100 <=> 0 to 1000
-        public byte osd_battery_show_percentage = 1;      // use remaining % or used mAh
+        public byte osd_battery_show_percentage = 0;      // use remaining % or used mAh
         static uint8_t osd_battery_pic = 0xb4;         // picture to show battery remaining
 
         static uint8_t spe = 0;
@@ -127,7 +118,7 @@ namespace OSD
         static float osd_lon = 117.883419f;                    // longitude
         static uint8_t osd_satellites_visible = 7;     // number of satelites
         static uint8_t osd_fix_type = 3;               // GPS lock 0-1=no fix, 2=2D, 3=3D
-        static int start_Time = 3785; 
+        static int start_Time = 3785;
 
         //static uint8_t osd_got_home = 0;               // tels if got home position or not
         //static float osd_home_lat = 0;               // home latidude
@@ -170,21 +161,26 @@ namespace OSD
         //static boolean enable_mav_request = 0;
         //rssi varables
         //public uint8_t rssi = 0;
-        public uint8_t rssipersent = 0;
-        public uint8_t rssical = 255;
-        public uint8_t rssiraw_on = 0;
+        public uint8_t rssi_min = 230;
+        public uint8_t rssi_max = 255;
+        public uint8_t rssi_source = 8;
         static uint8_t osd_rssi = 2;
+        static uint8_t osd_lq = 2;
+        public uint8_t lq_min = 100;
+        public uint8_t lq_max = 200;
+        public uint8_t lq_source = 0;
+        public uint8_t lq_warn_level = 20;
         public uint8_t radio_setup_flag = 0;
-        public uint8_t ch_toggle = 8; //CH8
+        public uint8_t ch_toggle = 0; //CH8
         public boolean switch_mode = 0;
         public boolean auto_screen_switch = 1;
         public boolean pal_ntsc = 1; //PAL 1 - NTSC 0
-        public uint8_t osd_brightness = 0; // low bright
-        
-        public uint8_t rssi_warn_level = 5;
-        public uint8_t batt_warn_level = 10;
+        public uint8_t osd_brightness = 2; // low bright
 
-        public string callsign_str = "a1b2c3d4";
+        public uint8_t rssi_warn_level = 25;
+        public uint8_t batt_warn_level = 25;
+
+        public string callsign_str = "callsign";
         //public uint8_t[] call_sign_parse = new uint8_t[6];
 
         public uint8_t chan1_raw = 0;
@@ -196,14 +192,13 @@ namespace OSD
         public uint8_t chan7_raw = 0;
         public uint8_t chan8_raw = 0;
         public uint8_t tr = 0;
-        static float temperature = 23.5f;
 
         /******* PANELS - DEFINITION *******/
 
         /* **************************************************************** */
         // Panel  : COG
         // Needs  : X, Y locations
-        // Output : 
+        // Output :
         // Size   : 1 x 7Hea  (rows x chars)
         // Staus  : done
 
@@ -221,7 +216,7 @@ namespace OSD
         /* **************************************************************** */
         // Panel  : ODO
         // Needs  : X, Y locations
-        // Output : 
+        // Output :
         // Size   : 1 x 7Hea  (rows x chars)
         // Staus  : done
 
@@ -231,25 +226,7 @@ namespace OSD
             osd.openPanel();
 
             osd.printf("%c%c%4.2f%c", 0x8F, 0x20, tdistance * converth, bigDistanceChar);
-            
-            osd.closePanel();
-            return 0;
-        }
 
-        /* **************************************************************** */
-        // Panel  : Temperature
-        // Needs  : X, Y locations
-        // Output : 
-        // Size   : 1 x 7Hea  (rows x chars)
-        // Staus  : done
-
-        public int panTemp(int first_col, int first_line)
-        {
-            osd.setPanel(first_col, first_line);
-            osd.openPanel();
-            {
-                osd.printf("%5.1f%c", temperature * tempconv + tempconvAdd, temperatureChar);
-            }
             osd.closePanel();
             return 0;
         }
@@ -257,7 +234,7 @@ namespace OSD
         /* **************************************************************** */
         // Panel  : PanCh
         // Needs  : X, Y locations
-        // Output : 
+        // Output :
         // Size   : 1 x 7Hea  (rows x chars)
         // Staus  : done
 
@@ -275,7 +252,7 @@ namespace OSD
         /* **************************************************************** */
         // Panel  : efficiency
         // Needs  : X, Y locations
-        // Output : 
+        // Output :
         // Size   : 1 x 7Hea  (rows x chars)
         // Staus  : done
 
@@ -293,9 +270,9 @@ namespace OSD
  	    /* **************************************************************** */
  	    // Panel  : panRSSI
  	    // Needs  : X, Y locations
- 	    // Output : Alt symbol and altitude value in meters from MAVLink
- 	    // Size   : 1 x 7Hea  (rows x chars)
-  	    // Staus  : done
+ 	    // Output : Rssi and optional Link Quality
+ 	    // Size   : 2 x 4Hea  (rows x chars)
+ 	    // Staus  : done
 
  	    public int panRSSI(int first_col, int first_line)
         {
@@ -303,6 +280,10 @@ namespace OSD
  	        osd.openPanel();
  	        {
  	            osd.printf("%c%3i%c", 0x09, osd_rssi, 0x25);
+              if (lq_source > 0)
+              {
+                osd.printf("|%c%3i%c", 0x40, osd_lq, 0x25);
+              }
  	        }
             osd.closePanel();
  	        return 0;
@@ -323,7 +304,7 @@ namespace OSD
             osd.closePanel();
             return 0;
         }
- 
+
         /******* PANELS - DEFINITION *******/
 
         /* **************************************************************** */
@@ -337,10 +318,10 @@ namespace OSD
         {
             osd.setPanel(first_col, first_line);
             osd.openPanel();
-            osd.printf("%c%2.0f%c|%c%2.0f%c", 0xb0, (alt_error * converth), high, 0xb1, ((aspd_error / 100.0) * converts), spe);           
+            osd.printf("%c%2.0f%c|%c%2.0f%c", 0xb0, (alt_error * converth), high, 0xb1, ((aspd_error / 100.0) * converts), spe);
  //           {
  //               osd.printf("%c%c%2.0f%c|%c%c%2.0f%c|%c%c%4.0i%c|%c%c%4.0i%c|%c%c%3.0f%c|%c%c%3.0f%c|%c%c%4.0f%c", 0x4E, 0x52, (nav_roll), 0xB0, 0x4E, 0x50, (nav_pitch), 0xB0, 0x4E, 0x48, (nav_bearing), 0xB0, 0x54, 0x42, (wp_target_bearing), 0xB0, 0x41, 0x45, (alt_error), 0x8D, 0x58, 0x45, (xtrack_error), 0x6D, 0x41, 0x45, ((aspd_error / 100.0) * converts), 0x88);
- //           }  
+ //           }
             osd.closePanel();
             return 0;
         }
@@ -356,14 +337,14 @@ namespace OSD
         {
             osd.setPanel(first_col, first_line);
             osd.openPanel();
-            
+
             {
                 osd.printf("%c%3.0f%c", 0x15, (double)(osd_climb * converth), climbChar);
             }
             osd.closePanel();
             return 0;
         }
-        
+
         /* **************************************************************** */
         // Panel  : pan wind speed
         // Needs  : X, Y locations
@@ -413,7 +394,7 @@ namespace OSD
             osd.setPanel(first_col, first_line);
             osd.openPanel();
             {
-                osd.printf("%c%5.2f%c%c", 0xBD, (osd_curr_A * .01), 0x0E);
+                osd.printf("%c%4.1f%c", 0xBD, (osd_curr_A * .01), 0x0E);
             }
             osd.closePanel();
             return 0;
@@ -430,11 +411,7 @@ namespace OSD
         {
             osd.setPanel(first_col, first_line);
             osd.openPanel();
-            //osd.printf("%c%5.0f%c",0x85, (double)(osd_alt - osd_home_alt), 0x8D);
-            if (this.osd.mslAltSign)//ArduCopter
-                osd.printf("%c%5.0f%c", 0x11, (double)(osd_alt * converth), altitudeChar);
-            else
-                osd.printf("%5.0f%c", (double)(osd_alt * converth), altitudeChar);
+            osd.printf("%c%4.0f%c", 0x11, (double)(osd_alt * converth), altitudeChar);
 
             osd.closePanel();
             return 0;
@@ -465,10 +442,7 @@ namespace OSD
             osd.setPanel(first_col, first_line);
             osd.openPanel();
             //osd.printf("%c%5.0f%c",0x85, (double)(osd_alt - osd_home_alt), 0x8D);
-            if (this.osd.homeAltSign)//ArduCopter
-                osd.printf("%c%5.0f%c", 0x12, (double)((osd_alt - osd_home_alt) * converth), altitudeChar);
-            else
-                osd.printf("%5.0f%c", (double)((osd_alt - osd_home_alt) * converth), altitudeChar);
+            osd.printf("%c%4.0f%c", 0x12, (double)((osd_alt - osd_home_alt) * converth), altitudeChar);
             osd.closePanel();
             return 0;
         }
@@ -484,10 +458,7 @@ namespace OSD
         {
             osd.setPanel(first_col, first_line);
             osd.openPanel();
-            if (this.osd.groundSpeedSign)//ArduCopter
-                osd.printf("%c%3.0f%c", 0x14, (double)(osd_groundspeed * convertspeed), velocityChar);
-            else
-                osd.printf("%3.0f%c", (double)(osd_groundspeed * convertspeed), velocityChar);
+            osd.printf("%c%4.0f%c", 0x14, (double)(osd_groundspeed * convertspeed), velocityChar);
             osd.closePanel();
             return 0;
         }
@@ -524,11 +495,11 @@ namespace OSD
             osd.openPanel();
             if (Convert.ToBoolean(osd_battery_show_percentage))
             {
-                osd.printf("%c%3.0i%c", 0x17, osd_battery_remaining, 0x25);
+                osd.printf("%%c%c%3.0i%c", 0x00, 0x00, 0x17, osd_battery_remaining, 0x25);
             }
             else
             {
-                osd.printf("%c%4.0i%c", 0x17, osd_battery_remaining, 0x01);
+                osd.printf("%c%5.0i%c", 0x17, osd_battery_remaining, 0x01);
             }
             osd.closePanel();
             return 0;
@@ -561,7 +532,7 @@ namespace OSD
         {
             osd.setPanel(first_col, first_line);
             osd.openPanel();
-            osd.printf("%c%3.0i%c", 0x02, osd_throttle, 0x25);
+            osd.printf("%c%4.0i%c", 0x02, osd_throttle, 0x25);
             osd.closePanel();
             return 0;
         }
@@ -577,7 +548,7 @@ namespace OSD
         {
             osd.setPanel(first_col, first_line);
             osd.openPanel();
-            osd.printf("%c%5.0f%c", 0x0B, (double)(osd_home_distance * converth), bigDistanceChar);
+            osd.printf("%c%4.0f%c", 0x0B, (double)(osd_home_distance * converth), bigDistanceChar);
             osd.closePanel();
             return 0;
         }
@@ -739,7 +710,7 @@ namespace OSD
             osd.setPanel(first_col, first_line);
             osd.openPanel();
             //osd.printf("%c%2i", 0x0f, osd_satellites_visible);
-            osd.printf("%c%2i", 0x2a, osd_satellites_visible);
+            osd.printf("%2i%c", osd_satellites_visible, 0x0f);
             osd.closePanel();
             return 0;
         }
@@ -791,7 +762,7 @@ namespace OSD
             //osd_heading  = osd_yaw;
             //if(osd_yaw < 0) osd_heading = 360 + osd_yaw;
             osd.printf_P(PSTR("\xc3\x80\x81\x80\x82\x80\x81\x80\x87"));
-           
+
             osd.closePanel();
             return 0;
         }
@@ -817,7 +788,7 @@ namespace OSD
         /* **************************************************************** */
         // Panel  : panMavBeat
         // Needs  : X, Y locations
-        // Output : 2 symbols, one static and one that blinks on every 50th received 
+        // Output : 2 symbols, one static and one that blinks on every 50th received
         //          mavlink packet.
         // Size   : 1 x 2  (rows x chars)
         // Staus  : done
@@ -869,7 +840,7 @@ namespace OSD
         {
             osd.setPanel(first_col, first_line);
             osd.openPanel();
-            osd.printf("%c%c%c%2i%c%4.0f%c|%c%c%c%c%c%5.0f%c", 0x57, 0x70, 0x0, wp_number, 0x0, (double)((float)(wp_dist * converth)), smallDistanceChar, 0xa4, 0xa5, 0x20, 0x58, 0x45, (xtrack_error), smallDistanceChar); //Print in Km 
+            osd.printf("%c%c%c%2i%c%4.0f%c|%c%c%c%c%c%5.0f%c", 0x57, 0x70, 0x0, wp_number, 0x0, (double)((float)(wp_dist * converth)), smallDistanceChar, 0xa4, 0xa5, 0x20, 0x58, 0x45, (xtrack_error), smallDistanceChar); //Print in Km
             osd.closePanel();
             return 0;
         }
@@ -891,7 +862,7 @@ namespace OSD
         }
 
         /* **************************************************************** */
-        // Panel  : panFlightMode 
+        // Panel  : panFlightMode
         // Needs  : X, Y locations
         // Output : 2 symbols, one static name symbol and another that changes by flight modes
         // Size   : 1 x 2  (rows x chars)
@@ -918,7 +889,7 @@ namespace OSD
             }
             else if (this.osd.modelType == OSD.ModelType.Plane) // arduplane
             {
-                osd.printf_P(PSTR("manu"));//Stabilize
+                osd.printf_P(PSTR("manual"));//Stabilize
                 //if (osd_mode == (byte)ArdupilotMega.MAVLink.MAV_MODE.MAV_MODE_TEST1 && osd_nav_mode == (byte)ArdupilotMega.MAVLink.MAV_NAV.MAV_NAV_VECTOR) osd.printf_P(PSTR("\x7F\xE2"));//Stabilize
                 //if (osd_mode == (byte)ArdupilotMega.MAVLink.MAV_MODE.MAV_MODE_MANUAL && osd_nav_mode == (byte)ArdupilotMega.MAVLink.MAV_NAV.MAV_NAV_VECTOR) osd.printf_P(PSTR("\x7F\xE3"));//Manual
                 //if (osd_mode == (byte)ArdupilotMega.MAVLink.MAV_MODE.MAV_MODE_AUTO && osd_nav_mode == (byte)ArdupilotMega.MAVLink.MAV_NAV.MAV_NAV_LOITER) osd.printf_P(PSTR("\x7F\xE4"));//Loiter

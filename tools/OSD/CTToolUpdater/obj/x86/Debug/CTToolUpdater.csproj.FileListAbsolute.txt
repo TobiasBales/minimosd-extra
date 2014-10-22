@@ -12,3 +12,7 @@ E:\Documents and Settings\vitorr\My Documents\minimosd-extra\trunk\Tools\bin\Deb
 E:\Documents and Settings\vitorr\My Documents\minimosd-extra\trunk\Tools\bin\Debug\CTToolUpdater.pdb
 E:\Documents and Settings\vitorr\My Documents\minimosd-extra\trunk\Tools\OSD\bin\Debug\CTToolUpdater.exe
 E:\Documents and Settings\vitorr\My Documents\minimosd-extra\trunk\Tools\OSD\bin\Debug\CTToolUpdater.pdb
+\\VBOXSVR\fpv\minimosd-extra\tools\OSD\bin\Debug\CTToolUpdater.exe
+\\VBOXSVR\fpv\minimosd-extra\tools\OSD\bin\Debug\CTToolUpdater.pdb
+\\VBOXSVR\fpv\minimosd-extra\tools\OSD\CTToolUpdater\obj\x86\Debug\CTToolUpdater.exe
+\\VBOXSVR\fpv\minimosd-extra\tools\OSD\CTToolUpdater\obj\x86\Debug\CTToolUpdater.pdb

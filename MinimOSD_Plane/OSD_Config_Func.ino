@@ -165,9 +165,9 @@ void writeSettings() {
  //   writeEEPROM(on, panCh_en_ADDR + offset);
  //   writeEEPROM(10, panCh_x_ADDR + offset);
  //   writeEEPROM(4,  panCh_y_ADDR + offset);
-    writeEEPROM(off, panTemp_en_ADDR + offset);
-    writeEEPROM(22, panTemp_x_ADDR + offset);
-    writeEEPROM(14, panTemp_y_ADDR + offset);
+    //writeEEPROM(off, panTemp_en_ADDR + offset);
+    //writeEEPROM(22, panTemp_x_ADDR + offset);
+    //writeEEPROM(14, panTemp_y_ADDR + offset);
 //    writeEEPROM(on, panFata_en_ADDR + offset);
 //    writeEEPROM(10, panFdata_x_ADDR + offset);
 //    writeEEPROM(4,  panFdata_y_ADDR + offset);
@@ -192,9 +192,14 @@ void readSettings() {
 //	}
     ch_toggle = EEPROM.read(ch_toggle_ADDR);
     //  battp = EEPROM.read(battp_ADDR);
-    rssical = EEPROM.read(OSD_RSSI_HIGH_ADDR);
-    rssipersent = EEPROM.read(OSD_RSSI_LOW_ADDR);
-    rssiraw_on = EEPROM.read(OSD_RSSI_RAW_ADDR);
+    rssi_max = EEPROM.read(OSD_RSSI_HIGH_ADDR);
+    rssi_min = EEPROM.read(OSD_RSSI_LOW_ADDR);
+    rssi_source = EEPROM.read(OSD_RSSI_RAW_ADDR);
+
+    lq_max = EEPROM.read(OSD_LQ_HIGH_ADDR);
+    lq_min = EEPROM.read(OSD_LQ_LOW_ADDR);
+    lq_source = EEPROM.read(OSD_LQ_RAW_ADDR);
+    lq_warn_level = EEPROM.read(OSD_LQ_WARN_ADDR);
 
     batt_warn_level = EEPROM.read(OSD_BATT_WARN_ADDR);
     rssi_warn_level = EEPROM.read(OSD_RSSI_WARN_ADDR);
@@ -356,9 +361,9 @@ void readPanelSettings() {
 //    panCh_XY[0][panel] = readEEPROM(panCh_x_ADDR + offset);
 //    panCh_XY[1][panel] = checkPAL(readEEPROM(panCh_y_ADDR + offset));
 
-    setBit(panE_REG[panel], TEMP_BIT, readEEPROM(panTemp_en_ADDR + offset));
-    panTemp_XY[0][panel] = readEEPROM(panTemp_x_ADDR + offset);
-    panTemp_XY[1][panel] = checkPAL(readEEPROM(panTemp_y_ADDR + offset));
+    //setBit(panE_REG[panel], TEMP_BIT, readEEPROM(panTemp_en_ADDR + offset));
+    //panTemp_XY[0][panel] = readEEPROM(panTemp_x_ADDR + offset);
+    //panTemp_XY[1][panel] = checkPAL(readEEPROM(panTemp_y_ADDR + offset));
 
     setBit(panE_REG[panel], DIST_BIT, readEEPROM(panDistance_en_ADDR + offset));
     panDistance_XY[0][panel] = readEEPROM(panDistance_x_ADDR + offset);

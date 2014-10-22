@@ -4,7 +4,7 @@
 
 // Version number, incrementing this will erase/upload factory settings.
 // Only devs should increment this
-#define VER 76
+#define VER 77
 
 // EEPROM Stepping, be careful not to overstep.
 // We reserved floats for just to be sure if some values needs to be
@@ -57,7 +57,7 @@
 // panE_REG Byte has:
 
 //#define Ch_BIT         0
-#define TEMP_BIT       1
+//#define TEMP_BIT       1
 #define DIST_BIT       2
 
 /* *********************************************** */
@@ -175,9 +175,9 @@
 //#define panCh_en_ADDR 206
 //#define panCh_x_ADDR 208
 //#define panCh_y_ADDR 210
-#define panTemp_en_ADDR 212
-#define panTemp_x_ADDR 214
-#define panTemp_y_ADDR 216
+//#define panTemp_en_ADDR 212
+//#define panTemp_x_ADDR 214
+//#define panTemp_y_ADDR 216
 //#define panFdata_en_ADDR 218
 //#define panFdata_x_ADDR 220
 //#define panFdata_y_ADDR 222
@@ -212,15 +212,21 @@
 
 #define OSD_CALL_SIGN_ADDR 920
 #define OSD_CALL_SIGN_TOTAL 8
-#define FW_VERSION1_ADDR 930
-#define FW_VERSION2_ADDR 932
-#define FW_VERSION3_ADDR 934
-#define CS_VERSION1_ADDR 936
-#define CS_VERSION2_ADDR 938
-#define CS_VERSION3_ADDR 940
+#define OSD_LQ_HIGH_ADDR 930
+#define OSD_LQ_LOW_ADDR 932
+#define OSD_LQ_RAW_ADDR 934
+#define OSD_LQ_WARN_ADDR 936
+
+#define FW_VERSION1_ADDR 940
+#define FW_VERSION2_ADDR 942
+#define FW_VERSION3_ADDR 944
+#define CS_VERSION1_ADDR 946
+#define CS_VERSION2_ADDR 948
+#define CS_VERSION3_ADDR 950
+
 
 #define CHK1 1000
 #define CHK2 1006
 
 
-#define EEPROM_MAX_ADDR 1024 // this is 328 chip
+#define EEPROM_MAX_ADDR 1024 // this is 328 chip

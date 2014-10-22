@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 namespace OSD
 {
     partial class OSD
@@ -43,6 +43,8 @@ namespace OSD
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveToFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.loadFromFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.loadDefaultsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -101,19 +103,27 @@ namespace OSD
             this.STALL_label = new System.Windows.Forms.Label();
             this.STALL_numeric = new System.Windows.Forms.NumericUpDown();
             this.groupBoxRSSI = new System.Windows.Forms.GroupBox();
+            this.LQWARN_numeric = new System.Windows.Forms.NumericUpDown();
+            this.lblLQWarning = new System.Windows.Forms.Label();
+            this.lblLQMax = new System.Windows.Forms.Label();
+            this.lblLQMin = new System.Windows.Forms.Label();
+            this.cbxLQChannel = new System.Windows.Forms.ComboBox();
+            this.lblLQChannel = new System.Windows.Forms.Label();
             this.cbxRSSIChannel = new System.Windows.Forms.ComboBox();
             this.label15 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
+            this.lblRSSIWarning = new System.Windows.Forms.Label();
             this.RSSI_WARNnumeric = new System.Windows.Forms.NumericUpDown();
-            this.RSSI_RAW = new System.Windows.Forms.CheckBox();
             this.lblRSSIMax = new System.Windows.Forms.Label();
+            this.LQ_numeric_min = new System.Windows.Forms.NumericUpDown();
             this.lblRSSIMin = new System.Windows.Forms.Label();
             this.RSSI_numeric_max = new System.Windows.Forms.NumericUpDown();
             this.RSSI_numeric_min = new System.Windows.Forms.NumericUpDown();
+            this.LQ_numeric_max = new System.Windows.Forms.NumericUpDown();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.LIST_items = new System.Windows.Forms.TreeView();
             this.rbtSortCategory = new System.Windows.Forms.RadioButton();
             this.rbtSortAlphabetic = new System.Windows.Forms.RadioButton();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.LIST_items2 = new System.Windows.Forms.TreeView();
             this.rbtSortCategory2 = new System.Windows.Forms.RadioButton();
@@ -123,6 +133,10 @@ namespace OSD
             this.label4 = new System.Windows.Forms.Label();
             this.NUM_Y2 = new System.Windows.Forms.NumericUpDown();
             this.NUM_X2 = new System.Windows.Forms.NumericUpDown();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.cbxShowUpdateDialog = new System.Windows.Forms.CheckBox();
+            this.cbxAutoUpdate = new System.Windows.Forms.CheckBox();
             this.lblFWModelType = new System.Windows.Forms.Label();
             this.lblModelType = new System.Windows.Forms.Label();
             this.cbxModelType = new System.Windows.Forms.ComboBox();
@@ -132,13 +146,6 @@ namespace OSD
             this.lblLatestCharsetUploaded = new System.Windows.Forms.Label();
             this.groupBox11 = new System.Windows.Forms.GroupBox();
             this.groupBox12 = new System.Windows.Forms.GroupBox();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.cbxAutoUpdate = new System.Windows.Forms.CheckBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.saveToFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.loadFromFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.cbxShowUpdateDialog = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.NUM_Y)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.NUM_X)).BeginInit();
@@ -159,19 +166,22 @@ namespace OSD
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.STALL_numeric)).BeginInit();
             this.groupBoxRSSI.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.LQWARN_numeric)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.RSSI_WARNnumeric)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.LQ_numeric_min)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.RSSI_numeric_max)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.RSSI_numeric_min)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.LQ_numeric_max)).BeginInit();
             this.tabPage1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tabPage2.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.NUM_Y2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.NUM_X2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            this.tabPage3.SuspendLayout();
             this.groupBox11.SuspendLayout();
             this.groupBox12.SuspendLayout();
-            this.tabPage3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -233,7 +243,7 @@ namespace OSD
             // BUT_WriteOSD
             // 
             this.BUT_WriteOSD.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.BUT_WriteOSD.Location = new System.Drawing.Point(540, 508);
+            this.BUT_WriteOSD.Location = new System.Drawing.Point(546, 542);
             this.BUT_WriteOSD.Name = "BUT_WriteOSD";
             this.BUT_WriteOSD.Size = new System.Drawing.Size(148, 23);
             this.BUT_WriteOSD.TabIndex = 2;
@@ -245,7 +255,7 @@ namespace OSD
             // 
             this.CMB_ComPort.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.CMB_ComPort.FormattingEnabled = true;
-            this.CMB_ComPort.Location = new System.Drawing.Point(330, 510);
+            this.CMB_ComPort.Location = new System.Drawing.Point(336, 544);
             this.CMB_ComPort.Name = "CMB_ComPort";
             this.CMB_ComPort.Size = new System.Drawing.Size(98, 21);
             this.CMB_ComPort.TabIndex = 4;
@@ -254,7 +264,7 @@ namespace OSD
             // BUT_ReadOSD
             // 
             this.BUT_ReadOSD.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.BUT_ReadOSD.Location = new System.Drawing.Point(434, 508);
+            this.BUT_ReadOSD.Location = new System.Drawing.Point(440, 542);
             this.BUT_ReadOSD.Name = "BUT_ReadOSD";
             this.BUT_ReadOSD.Size = new System.Drawing.Size(100, 23);
             this.BUT_ReadOSD.TabIndex = 6;
@@ -267,9 +277,9 @@ namespace OSD
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripProgressBar1,
             this.toolStripStatusLabel1});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 536);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 570);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(688, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(694, 22);
             this.statusStrip1.TabIndex = 8;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -292,7 +302,7 @@ namespace OSD
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(688, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(694, 24);
             this.menuStrip1.TabIndex = 10;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -306,31 +316,49 @@ namespace OSD
             this.toolStripSeparator1,
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(35, 20);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "File";
+            // 
+            // saveToFileToolStripMenuItem
+            // 
+            this.saveToFileToolStripMenuItem.Image = global::OSD.Properties.Resources.saveHS;
+            this.saveToFileToolStripMenuItem.Name = "saveToFileToolStripMenuItem";
+            this.saveToFileToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
+            this.saveToFileToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
+            this.saveToFileToolStripMenuItem.Text = "Save OSD file...";
+            this.saveToFileToolStripMenuItem.Click += new System.EventHandler(this.saveToFileToolStripMenuItem_Click);
+            // 
+            // loadFromFileToolStripMenuItem
+            // 
+            this.loadFromFileToolStripMenuItem.Image = global::OSD.Properties.Resources.openHS;
+            this.loadFromFileToolStripMenuItem.Name = "loadFromFileToolStripMenuItem";
+            this.loadFromFileToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
+            this.loadFromFileToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
+            this.loadFromFileToolStripMenuItem.Text = "Open OSD File...";
+            this.loadFromFileToolStripMenuItem.Click += new System.EventHandler(this.loadFromFileToolStripMenuItem_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(203, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(199, 6);
             // 
             // loadDefaultsToolStripMenuItem
             // 
             this.loadDefaultsToolStripMenuItem.Name = "loadDefaultsToolStripMenuItem";
-            this.loadDefaultsToolStripMenuItem.Size = new System.Drawing.Size(206, 22);
+            this.loadDefaultsToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
             this.loadDefaultsToolStripMenuItem.Text = "Load Defaults";
             this.loadDefaultsToolStripMenuItem.Click += new System.EventHandler(this.loadDefaultsToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(203, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(199, 6);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
             this.exitToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.F4)));
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(206, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -340,14 +368,14 @@ namespace OSD
             this.CHK_ntsc,
             this.CHK_pal});
             this.videoModeToolStripMenuItem.Name = "videoModeToolStripMenuItem";
-            this.videoModeToolStripMenuItem.Size = new System.Drawing.Size(74, 20);
+            this.videoModeToolStripMenuItem.Size = new System.Drawing.Size(83, 20);
             this.videoModeToolStripMenuItem.Text = "Video Mode";
             // 
             // CHK_ntsc
             // 
             this.CHK_ntsc.CheckOnClick = true;
             this.CHK_ntsc.Name = "CHK_ntsc";
-            this.CHK_ntsc.Size = new System.Drawing.Size(111, 22);
+            this.CHK_ntsc.Size = new System.Drawing.Size(104, 22);
             this.CHK_ntsc.Text = "NTSC";
             this.CHK_ntsc.CheckStateChanged += new System.EventHandler(this.nTSCToolStripMenuItem_CheckStateChanged);
             this.CHK_ntsc.Click += new System.EventHandler(this.CHK_ntsc_Click);
@@ -358,7 +386,7 @@ namespace OSD
             this.CHK_pal.CheckOnClick = true;
             this.CHK_pal.CheckState = System.Windows.Forms.CheckState.Checked;
             this.CHK_pal.Name = "CHK_pal";
-            this.CHK_pal.Size = new System.Drawing.Size(111, 22);
+            this.CHK_pal.Size = new System.Drawing.Size(104, 22);
             this.CHK_pal.Text = "PAL";
             this.CHK_pal.CheckedChanged += new System.EventHandler(this.CHK_pal_CheckedChanged);
             this.CHK_pal.CheckStateChanged += new System.EventHandler(this.pALToolStripMenuItem_CheckStateChanged);
@@ -380,7 +408,7 @@ namespace OSD
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
             this.optionsToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.G)));
             this.optionsToolStripMenuItem.ShowShortcutKeys = false;
-            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(56, 20);
+            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
             this.optionsToolStripMenuItem.Text = "Options";
             // 
             // checkBox1
@@ -389,14 +417,14 @@ namespace OSD
             this.checkBox1.CheckOnClick = true;
             this.checkBox1.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(233, 22);
+            this.checkBox1.Size = new System.Drawing.Size(231, 22);
             this.checkBox1.Text = "Show Grid";
             this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
             // updateFirmwareToolStripMenuItem
             // 
             this.updateFirmwareToolStripMenuItem.Name = "updateFirmwareToolStripMenuItem";
-            this.updateFirmwareToolStripMenuItem.Size = new System.Drawing.Size(233, 22);
+            this.updateFirmwareToolStripMenuItem.Size = new System.Drawing.Size(231, 22);
             this.updateFirmwareToolStripMenuItem.Text = "Update Firmware...";
             this.updateFirmwareToolStripMenuItem.ToolTipText = "Re-Flash the OSD with a new firmware image";
             this.updateFirmwareToolStripMenuItem.Click += new System.EventHandler(this.updateFirmwareToolStripMenuItem_Click);
@@ -404,14 +432,14 @@ namespace OSD
             // customBGPictureToolStripMenuItem
             // 
             this.customBGPictureToolStripMenuItem.Name = "customBGPictureToolStripMenuItem";
-            this.customBGPictureToolStripMenuItem.Size = new System.Drawing.Size(233, 22);
+            this.customBGPictureToolStripMenuItem.Size = new System.Drawing.Size(231, 22);
             this.customBGPictureToolStripMenuItem.Text = "Background Image...";
             this.customBGPictureToolStripMenuItem.Click += new System.EventHandler(this.customBGPictureToolStripMenuItem_Click);
             // 
             // sendTLogToolStripMenuItem
             // 
             this.sendTLogToolStripMenuItem.Name = "sendTLogToolStripMenuItem";
-            this.sendTLogToolStripMenuItem.Size = new System.Drawing.Size(233, 22);
+            this.sendTLogToolStripMenuItem.Size = new System.Drawing.Size(231, 22);
             this.sendTLogToolStripMenuItem.Text = "Send TLog...";
             this.sendTLogToolStripMenuItem.ToolTipText = "Send a Mavlink transmission log to the OSD to test the layout";
             this.sendTLogToolStripMenuItem.Click += new System.EventHandler(this.sendTLogToolStripMenuItem_Click);
@@ -419,7 +447,7 @@ namespace OSD
             // updateFontToolStripMenuItem
             // 
             this.updateFontToolStripMenuItem.Name = "updateFontToolStripMenuItem";
-            this.updateFontToolStripMenuItem.Size = new System.Drawing.Size(233, 22);
+            this.updateFontToolStripMenuItem.Size = new System.Drawing.Size(231, 22);
             this.updateFontToolStripMenuItem.Text = "Update CharSet...";
             this.updateFontToolStripMenuItem.ToolTipText = "Update the font file on the OSD";
             this.updateFontToolStripMenuItem.Click += new System.EventHandler(this.updateFontToolStripMenuItem_Click);
@@ -427,7 +455,7 @@ namespace OSD
             // updateCharsetDevToolStripMenuItem
             // 
             this.updateCharsetDevToolStripMenuItem.Name = "updateCharsetDevToolStripMenuItem";
-            this.updateCharsetDevToolStripMenuItem.Size = new System.Drawing.Size(233, 22);
+            this.updateCharsetDevToolStripMenuItem.Size = new System.Drawing.Size(231, 22);
             this.updateCharsetDevToolStripMenuItem.Text = "Update Charset (Dev)...";
             this.updateCharsetDevToolStripMenuItem.Visible = false;
             this.updateCharsetDevToolStripMenuItem.Click += new System.EventHandler(this.updateCharsetDevToolStripMenuItem_Click);
@@ -435,7 +463,7 @@ namespace OSD
             // updateCharsetcustomFwToolStripMenuItem
             // 
             this.updateCharsetcustomFwToolStripMenuItem.Name = "updateCharsetcustomFwToolStripMenuItem";
-            this.updateCharsetcustomFwToolStripMenuItem.Size = new System.Drawing.Size(233, 22);
+            this.updateCharsetcustomFwToolStripMenuItem.Size = new System.Drawing.Size(231, 22);
             this.updateCharsetcustomFwToolStripMenuItem.Text = "Update Charset (custom fw)...";
             this.updateCharsetcustomFwToolStripMenuItem.Visible = false;
             this.updateCharsetcustomFwToolStripMenuItem.Click += new System.EventHandler(this.updateCharsetcustomFwToolStripMenuItem_Click);
@@ -443,14 +471,14 @@ namespace OSD
             // presentCustomCharsetToolStripMenuItem
             // 
             this.presentCustomCharsetToolStripMenuItem.Name = "presentCustomCharsetToolStripMenuItem";
-            this.presentCustomCharsetToolStripMenuItem.Size = new System.Drawing.Size(233, 22);
+            this.presentCustomCharsetToolStripMenuItem.Size = new System.Drawing.Size(231, 22);
             this.presentCustomCharsetToolStripMenuItem.Text = "Show Custom Charset...";
             this.presentCustomCharsetToolStripMenuItem.Click += new System.EventHandler(this.presentCustomCharsetToolStripMenuItem_Click);
             // 
             // setSketchesPathToolStripMenuItem
             // 
             this.setSketchesPathToolStripMenuItem.Name = "setSketchesPathToolStripMenuItem";
-            this.setSketchesPathToolStripMenuItem.Size = new System.Drawing.Size(233, 22);
+            this.setSketchesPathToolStripMenuItem.Size = new System.Drawing.Size(231, 22);
             this.setSketchesPathToolStripMenuItem.Text = "Set Arduino Sketches Path...";
             this.setSketchesPathToolStripMenuItem.Visible = false;
             this.setSketchesPathToolStripMenuItem.Click += new System.EventHandler(this.setSketchesPathToolStripMenuItem_Click);
@@ -458,7 +486,7 @@ namespace OSD
             // getFwFromOSDToolStripMenuItem
             // 
             this.getFwFromOSDToolStripMenuItem.Name = "getFwFromOSDToolStripMenuItem";
-            this.getFwFromOSDToolStripMenuItem.Size = new System.Drawing.Size(233, 22);
+            this.getFwFromOSDToolStripMenuItem.Size = new System.Drawing.Size(231, 22);
             this.getFwFromOSDToolStripMenuItem.Text = "GetFwFromOSD...";
             this.getFwFromOSDToolStripMenuItem.Visible = false;
             this.getFwFromOSDToolStripMenuItem.Click += new System.EventHandler(this.getFwFromOSDToolStripMenuItem_Click);
@@ -469,20 +497,20 @@ namespace OSD
             this.gettingStartedToolStripMenuItem,
             this.aboutToolStripMenuItem});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(40, 20);
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.helpToolStripMenuItem.Text = "Help";
             // 
             // gettingStartedToolStripMenuItem
             // 
             this.gettingStartedToolStripMenuItem.Name = "gettingStartedToolStripMenuItem";
-            this.gettingStartedToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
+            this.gettingStartedToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.gettingStartedToolStripMenuItem.Text = "Getting started";
             this.gettingStartedToolStripMenuItem.Click += new System.EventHandler(this.gettingStartedToolStripMenuItem_Click);
             // 
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.aboutToolStripMenuItem.Text = "About ";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
@@ -496,7 +524,7 @@ namespace OSD
             this.PANEL_tabs.Margin = new System.Windows.Forms.Padding(2);
             this.PANEL_tabs.Name = "PANEL_tabs";
             this.PANEL_tabs.SelectedIndex = 0;
-            this.PANEL_tabs.Size = new System.Drawing.Size(687, 407);
+            this.PANEL_tabs.Size = new System.Drawing.Size(687, 440);
             this.PANEL_tabs.TabIndex = 0;
             // 
             // tabPageConfig
@@ -514,7 +542,7 @@ namespace OSD
             this.tabPageConfig.Margin = new System.Windows.Forms.Padding(2);
             this.tabPageConfig.Name = "tabPageConfig";
             this.tabPageConfig.Padding = new System.Windows.Forms.Padding(2);
-            this.tabPageConfig.Size = new System.Drawing.Size(679, 381);
+            this.tabPageConfig.Size = new System.Drawing.Size(679, 414);
             this.tabPageConfig.TabIndex = 1;
             this.tabPageConfig.Text = "Config";
             this.tabPageConfig.UseVisualStyleBackColor = true;
@@ -593,9 +621,9 @@ namespace OSD
             // 
             this.groupBox9.Controls.Add(this.BRIGHTNESScomboBox);
             this.groupBox9.Controls.Add(this.label13);
-            this.groupBox9.Location = new System.Drawing.Point(180, 211);
+            this.groupBox9.Location = new System.Drawing.Point(357, 344);
             this.groupBox9.Name = "groupBox9";
-            this.groupBox9.Size = new System.Drawing.Size(150, 63);
+            this.groupBox9.Size = new System.Drawing.Size(160, 63);
             this.groupBox9.TabIndex = 10;
             this.groupBox9.TabStop = false;
             // 
@@ -664,7 +692,7 @@ namespace OSD
             this.groupBox7.Controls.Add(this.TOGGLE_BEH);
             this.groupBox7.Controls.Add(this.ONOFF_combo);
             this.groupBox7.Controls.Add(this.label11);
-            this.groupBox7.Location = new System.Drawing.Point(8, 205);
+            this.groupBox7.Location = new System.Drawing.Point(180, 205);
             this.groupBox7.Name = "groupBox7";
             this.groupBox7.Size = new System.Drawing.Size(150, 144);
             this.groupBox7.TabIndex = 8;
@@ -909,20 +937,94 @@ namespace OSD
             // 
             // groupBoxRSSI
             // 
+            this.groupBoxRSSI.Controls.Add(this.LQWARN_numeric);
+            this.groupBoxRSSI.Controls.Add(this.lblLQWarning);
+            this.groupBoxRSSI.Controls.Add(this.lblLQMax);
+            this.groupBoxRSSI.Controls.Add(this.lblLQMin);
+            this.groupBoxRSSI.Controls.Add(this.cbxLQChannel);
+            this.groupBoxRSSI.Controls.Add(this.lblLQChannel);
             this.groupBoxRSSI.Controls.Add(this.cbxRSSIChannel);
             this.groupBoxRSSI.Controls.Add(this.label15);
-            this.groupBoxRSSI.Controls.Add(this.label8);
+            this.groupBoxRSSI.Controls.Add(this.lblRSSIWarning);
             this.groupBoxRSSI.Controls.Add(this.RSSI_WARNnumeric);
-            this.groupBoxRSSI.Controls.Add(this.RSSI_RAW);
             this.groupBoxRSSI.Controls.Add(this.lblRSSIMax);
+            this.groupBoxRSSI.Controls.Add(this.LQ_numeric_min);
             this.groupBoxRSSI.Controls.Add(this.lblRSSIMin);
             this.groupBoxRSSI.Controls.Add(this.RSSI_numeric_max);
             this.groupBoxRSSI.Controls.Add(this.RSSI_numeric_min);
+            this.groupBoxRSSI.Controls.Add(this.LQ_numeric_max);
             this.groupBoxRSSI.Location = new System.Drawing.Point(8, 5);
             this.groupBoxRSSI.Name = "groupBoxRSSI";
-            this.groupBoxRSSI.Size = new System.Drawing.Size(150, 194);
+            this.groupBoxRSSI.Size = new System.Drawing.Size(150, 372);
             this.groupBoxRSSI.TabIndex = 3;
             this.groupBoxRSSI.TabStop = false;
+            // 
+            // LQWARN_numeric
+            // 
+            this.LQWARN_numeric.Location = new System.Drawing.Point(9, 347);
+            this.LQWARN_numeric.Name = "LQWARN_numeric";
+            this.LQWARN_numeric.Size = new System.Drawing.Size(91, 20);
+            this.LQWARN_numeric.TabIndex = 22;
+            this.LQWARN_numeric.Value = new decimal(new int[] {
+            20,
+            0,
+            0,
+            0});
+            this.LQWARN_numeric.ValueChanged += new System.EventHandler(this.LQWARN_numeric_ValueChanged);
+            // 
+            // lblLQWarning
+            // 
+            this.lblLQWarning.AutoSize = true;
+            this.lblLQWarning.Location = new System.Drawing.Point(6, 331);
+            this.lblLQWarning.Name = "lblLQWarning";
+            this.lblLQWarning.Size = new System.Drawing.Size(110, 13);
+            this.lblLQWarning.TabIndex = 21;
+            this.lblLQWarning.Text = "LQ Warning Level (%)";
+            // 
+            // lblLQMax
+            // 
+            this.lblLQMax.AutoSize = true;
+            this.lblLQMax.Location = new System.Drawing.Point(6, 284);
+            this.lblLQMax.Name = "lblLQMax";
+            this.lblLQMax.Size = new System.Drawing.Size(146, 13);
+            this.lblLQMax.TabIndex = 20;
+            this.lblLQMax.Text = "Link Quality Max Value (pwm)";
+            // 
+            // lblLQMin
+            // 
+            this.lblLQMin.AutoSize = true;
+            this.lblLQMin.Location = new System.Drawing.Point(6, 241);
+            this.lblLQMin.Name = "lblLQMin";
+            this.lblLQMin.Size = new System.Drawing.Size(143, 13);
+            this.lblLQMin.TabIndex = 19;
+            this.lblLQMin.Text = "Link Quality Min Value (pwm)";
+            // 
+            // cbxLQChannel
+            // 
+            this.cbxLQChannel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbxLQChannel.FormattingEnabled = true;
+            this.cbxLQChannel.Items.AddRange(new object[] {
+            "Disabled",
+            "Channel 4",
+            "Channel 5",
+            "Chanenl 6",
+            "Channel 7",
+            "Channel 8"});
+            this.cbxLQChannel.Location = new System.Drawing.Point(9, 213);
+            this.cbxLQChannel.Margin = new System.Windows.Forms.Padding(2);
+            this.cbxLQChannel.Name = "cbxLQChannel";
+            this.cbxLQChannel.Size = new System.Drawing.Size(135, 21);
+            this.cbxLQChannel.TabIndex = 18;
+            this.cbxLQChannel.SelectedIndexChanged += new System.EventHandler(this.cbxLQChannel_SelectedIndexChanged);
+            // 
+            // lblLQChannel
+            // 
+            this.lblLQChannel.AutoSize = true;
+            this.lblLQChannel.Location = new System.Drawing.Point(6, 196);
+            this.lblLQChannel.Name = "lblLQChannel";
+            this.lblLQChannel.Size = new System.Drawing.Size(103, 13);
+            this.lblLQChannel.TabIndex = 17;
+            this.lblLQChannel.Text = "Link Quality channel";
             // 
             // cbxRSSIChannel
             // 
@@ -930,6 +1032,10 @@ namespace OSD
             this.cbxRSSIChannel.FormattingEnabled = true;
             this.cbxRSSIChannel.Items.AddRange(new object[] {
             "Mavlink RSSI",
+            "Channel 4",
+            "Channel 5",
+            "Chanenl 6",
+            "Channel 7",
             "Channel 8"});
             this.cbxRSSIChannel.Location = new System.Drawing.Point(9, 27);
             this.cbxRSSIChannel.Margin = new System.Windows.Forms.Padding(2);
@@ -943,18 +1049,18 @@ namespace OSD
             this.label15.AutoSize = true;
             this.label15.Location = new System.Drawing.Point(6, 12);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(76, 13);
+            this.label15.Size = new System.Drawing.Size(73, 13);
             this.label15.TabIndex = 12;
-            this.label15.Text = "RSSI channel:";
+            this.label15.Text = "RSSI channel";
             // 
-            // label8
+            // lblRSSIWarning
             // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(6, 129);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(121, 13);
-            this.label8.TabIndex = 11;
-            this.label8.Text = "RSSI Warning Level (%)";
+            this.lblRSSIWarning.AutoSize = true;
+            this.lblRSSIWarning.Location = new System.Drawing.Point(6, 129);
+            this.lblRSSIWarning.Name = "lblRSSIWarning";
+            this.lblRSSIWarning.Size = new System.Drawing.Size(121, 13);
+            this.lblRSSIWarning.TabIndex = 11;
+            this.lblRSSIWarning.Text = "RSSI Warning Level (%)";
             // 
             // RSSI_WARNnumeric
             // 
@@ -962,19 +1068,12 @@ namespace OSD
             this.RSSI_WARNnumeric.Name = "RSSI_WARNnumeric";
             this.RSSI_WARNnumeric.Size = new System.Drawing.Size(91, 20);
             this.RSSI_WARNnumeric.TabIndex = 10;
+            this.RSSI_WARNnumeric.Value = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
             this.RSSI_WARNnumeric.ValueChanged += new System.EventHandler(this.RSSI_WARNnumeric_ValueChanged);
-            // 
-            // RSSI_RAW
-            // 
-            this.RSSI_RAW.AutoSize = true;
-            this.RSSI_RAW.Location = new System.Drawing.Point(9, 170);
-            this.RSSI_RAW.Margin = new System.Windows.Forms.Padding(2);
-            this.RSSI_RAW.Name = "RSSI_RAW";
-            this.RSSI_RAW.Size = new System.Drawing.Size(112, 17);
-            this.RSSI_RAW.TabIndex = 9;
-            this.RSSI_RAW.Text = "RSSI Enable Raw";
-            this.RSSI_RAW.UseVisualStyleBackColor = true;
-            this.RSSI_RAW.CheckedChanged += new System.EventHandler(this.checkBox2_CheckedChanged);
             // 
             // lblRSSIMax
             // 
@@ -984,6 +1083,29 @@ namespace OSD
             this.lblRSSIMax.Size = new System.Drawing.Size(85, 13);
             this.lblRSSIMax.TabIndex = 3;
             this.lblRSSIMax.Text = "RSSI Max Value";
+            // 
+            // LQ_numeric_min
+            // 
+            this.LQ_numeric_min.Location = new System.Drawing.Point(9, 257);
+            this.LQ_numeric_min.Maximum = new decimal(new int[] {
+            2000,
+            0,
+            0,
+            0});
+            this.LQ_numeric_min.Minimum = new decimal(new int[] {
+            800,
+            0,
+            0,
+            0});
+            this.LQ_numeric_min.Name = "LQ_numeric_min";
+            this.LQ_numeric_min.Size = new System.Drawing.Size(120, 20);
+            this.LQ_numeric_min.TabIndex = 15;
+            this.LQ_numeric_min.Value = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.LQ_numeric_min.ValueChanged += new System.EventHandler(this.LQ_numeric_min_ValueChanged);
             // 
             // lblRSSIMin
             // 
@@ -1025,6 +1147,29 @@ namespace OSD
             this.RSSI_numeric_min.TabIndex = 0;
             this.RSSI_numeric_min.ValueChanged += new System.EventHandler(this.RSSI_numeric_min_ValueChanged);
             // 
+            // LQ_numeric_max
+            // 
+            this.LQ_numeric_max.Location = new System.Drawing.Point(9, 300);
+            this.LQ_numeric_max.Maximum = new decimal(new int[] {
+            2000,
+            0,
+            0,
+            0});
+            this.LQ_numeric_max.Minimum = new decimal(new int[] {
+            800,
+            0,
+            0,
+            0});
+            this.LQ_numeric_max.Name = "LQ_numeric_max";
+            this.LQ_numeric_max.Size = new System.Drawing.Size(120, 20);
+            this.LQ_numeric_max.TabIndex = 14;
+            this.LQ_numeric_max.Value = new decimal(new int[] {
+            2000,
+            0,
+            0,
+            0});
+            this.LQ_numeric_max.ValueChanged += new System.EventHandler(this.LQ_numeric_max_ValueChanged);
+            // 
             // tabPage1
             // 
             this.tabPage1.Controls.Add(this.LIST_items);
@@ -1035,7 +1180,7 @@ namespace OSD
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Margin = new System.Windows.Forms.Padding(2);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Size = new System.Drawing.Size(679, 381);
+            this.tabPage1.Size = new System.Drawing.Size(679, 414);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Panel 1";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -1072,6 +1217,19 @@ namespace OSD
             this.rbtSortAlphabetic.UseVisualStyleBackColor = true;
             this.rbtSortAlphabetic.CheckedChanged += new System.EventHandler(this.rbtSortAlphabetic_CheckedChanged);
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.pictureBox1.Location = new System.Drawing.Point(178, 17);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(497, 339);
+            this.pictureBox1.TabIndex = 0;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseDown);
+            this.pictureBox1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseMove);
+            this.pictureBox1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseUp);
+            // 
             // tabPage2
             // 
             this.tabPage2.Controls.Add(this.LIST_items2);
@@ -1082,7 +1240,7 @@ namespace OSD
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Margin = new System.Windows.Forms.Padding(2);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Size = new System.Drawing.Size(679, 381);
+            this.tabPage2.Size = new System.Drawing.Size(679, 414);
             this.tabPage2.TabIndex = 0;
             this.tabPage2.Text = "Panel 2";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -1175,6 +1333,58 @@ namespace OSD
             this.NUM_X2.TabIndex = 0;
             this.NUM_X2.ValueChanged += new System.EventHandler(this.numericUpDown3_ValueChanged);
             // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBox2.Location = new System.Drawing.Point(178, 17);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(497, 339);
+            this.pictureBox2.TabIndex = 3;
+            this.pictureBox2.TabStop = false;
+            this.pictureBox2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBox2_MouseDown);
+            this.pictureBox2.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBox2_MouseMove);
+            this.pictureBox2.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBox2_MouseUp);
+            // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.cbxShowUpdateDialog);
+            this.tabPage3.Controls.Add(this.cbxAutoUpdate);
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(679, 414);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "CT Tool";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // cbxShowUpdateDialog
+            // 
+            this.cbxShowUpdateDialog.AutoSize = true;
+            this.cbxShowUpdateDialog.Checked = true;
+            this.cbxShowUpdateDialog.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbxShowUpdateDialog.Location = new System.Drawing.Point(7, 29);
+            this.cbxShowUpdateDialog.Name = "cbxShowUpdateDialog";
+            this.cbxShowUpdateDialog.Size = new System.Drawing.Size(157, 17);
+            this.cbxShowUpdateDialog.TabIndex = 1;
+            this.cbxShowUpdateDialog.Text = "Prompt for update at startup";
+            this.cbxShowUpdateDialog.UseVisualStyleBackColor = true;
+            this.cbxShowUpdateDialog.CheckedChanged += new System.EventHandler(this.cbxShowUpdateDialog_CheckedChanged);
+            // 
+            // cbxAutoUpdate
+            // 
+            this.cbxAutoUpdate.AutoSize = true;
+            this.cbxAutoUpdate.Checked = true;
+            this.cbxAutoUpdate.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbxAutoUpdate.Location = new System.Drawing.Point(7, 6);
+            this.cbxAutoUpdate.Name = "cbxAutoUpdate";
+            this.cbxAutoUpdate.Size = new System.Drawing.Size(160, 17);
+            this.cbxAutoUpdate.TabIndex = 0;
+            this.cbxAutoUpdate.Text = "Check for updates at startup";
+            this.cbxAutoUpdate.UseVisualStyleBackColor = true;
+            this.cbxAutoUpdate.CheckedChanged += new System.EventHandler(this.cbxAutoUpdate_CheckedChanged);
+            // 
             // lblFWModelType
             // 
             this.lblFWModelType.Location = new System.Drawing.Point(6, 13);
@@ -1206,7 +1416,7 @@ namespace OSD
             // btnGeneratePanelsFile
             // 
             this.btnGeneratePanelsFile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnGeneratePanelsFile.Location = new System.Drawing.Point(1, 508);
+            this.btnGeneratePanelsFile.Location = new System.Drawing.Point(1, 542);
             this.btnGeneratePanelsFile.Name = "btnGeneratePanelsFile";
             this.btnGeneratePanelsFile.Size = new System.Drawing.Size(125, 23);
             this.btnGeneratePanelsFile.TabIndex = 15;
@@ -1229,7 +1439,7 @@ namespace OSD
             // 
             this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(266, 513);
+            this.label5.Location = new System.Drawing.Point(272, 547);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(58, 13);
             this.label5.TabIndex = 16;
@@ -1266,94 +1476,11 @@ namespace OSD
             this.groupBox12.TabStop = false;
             this.groupBox12.Text = "OSD Status:";
             // 
-            // tabPage3
-            // 
-            this.tabPage3.Controls.Add(this.cbxShowUpdateDialog);
-            this.tabPage3.Controls.Add(this.cbxAutoUpdate);
-            this.tabPage3.Location = new System.Drawing.Point(4, 22);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(679, 381);
-            this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "CT Tool";
-            this.tabPage3.UseVisualStyleBackColor = true;
-            // 
-            // cbxAutoUpdate
-            // 
-            this.cbxAutoUpdate.AutoSize = true;
-            this.cbxAutoUpdate.Checked = true;
-            this.cbxAutoUpdate.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbxAutoUpdate.Location = new System.Drawing.Point(7, 6);
-            this.cbxAutoUpdate.Name = "cbxAutoUpdate";
-            this.cbxAutoUpdate.Size = new System.Drawing.Size(160, 17);
-            this.cbxAutoUpdate.TabIndex = 0;
-            this.cbxAutoUpdate.Text = "Check for updates at startup";
-            this.cbxAutoUpdate.UseVisualStyleBackColor = true;
-            this.cbxAutoUpdate.CheckedChanged += new System.EventHandler(this.cbxAutoUpdate_CheckedChanged);
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)));
-            this.pictureBox1.Location = new System.Drawing.Point(178, 17);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(497, 339);
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
-            this.pictureBox1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseDown);
-            this.pictureBox1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseMove);
-            this.pictureBox1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseUp);
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox2.Location = new System.Drawing.Point(178, 17);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(497, 339);
-            this.pictureBox2.TabIndex = 3;
-            this.pictureBox2.TabStop = false;
-            this.pictureBox2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBox2_MouseDown);
-            this.pictureBox2.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBox2_MouseMove);
-            this.pictureBox2.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBox2_MouseUp);
-            // 
-            // saveToFileToolStripMenuItem
-            // 
-            this.saveToFileToolStripMenuItem.Image = global::OSD.Properties.Resources.saveHS;
-            this.saveToFileToolStripMenuItem.Name = "saveToFileToolStripMenuItem";
-            this.saveToFileToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.saveToFileToolStripMenuItem.Size = new System.Drawing.Size(206, 22);
-            this.saveToFileToolStripMenuItem.Text = "Save OSD file...";
-            this.saveToFileToolStripMenuItem.Click += new System.EventHandler(this.saveToFileToolStripMenuItem_Click);
-            // 
-            // loadFromFileToolStripMenuItem
-            // 
-            this.loadFromFileToolStripMenuItem.Image = global::OSD.Properties.Resources.openHS;
-            this.loadFromFileToolStripMenuItem.Name = "loadFromFileToolStripMenuItem";
-            this.loadFromFileToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.loadFromFileToolStripMenuItem.Size = new System.Drawing.Size(206, 22);
-            this.loadFromFileToolStripMenuItem.Text = "Open OSD File...";
-            this.loadFromFileToolStripMenuItem.Click += new System.EventHandler(this.loadFromFileToolStripMenuItem_Click);
-            // 
-            // cbxShowUpdateDialog
-            // 
-            this.cbxShowUpdateDialog.AutoSize = true;
-            this.cbxShowUpdateDialog.Checked = true;
-            this.cbxShowUpdateDialog.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbxShowUpdateDialog.Location = new System.Drawing.Point(7, 29);
-            this.cbxShowUpdateDialog.Name = "cbxShowUpdateDialog";
-            this.cbxShowUpdateDialog.Size = new System.Drawing.Size(157, 17);
-            this.cbxShowUpdateDialog.TabIndex = 1;
-            this.cbxShowUpdateDialog.Text = "Prompt for update at startup";
-            this.cbxShowUpdateDialog.UseVisualStyleBackColor = true;
-            this.cbxShowUpdateDialog.CheckedChanged += new System.EventHandler(this.cbxShowUpdateDialog_CheckedChanged);
-            // 
             // OSD
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(688, 558);
+            this.ClientSize = new System.Drawing.Size(694, 592);
             this.Controls.Add(this.groupBox12);
             this.Controls.Add(this.groupBox11);
             this.Controls.Add(this.label5);
@@ -1404,24 +1531,27 @@ namespace OSD
             ((System.ComponentModel.ISupportInitialize)(this.STALL_numeric)).EndInit();
             this.groupBoxRSSI.ResumeLayout(false);
             this.groupBoxRSSI.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.LQWARN_numeric)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.RSSI_WARNnumeric)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.LQ_numeric_min)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.RSSI_numeric_max)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.RSSI_numeric_min)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.LQ_numeric_max)).EndInit();
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.NUM_Y2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.NUM_X2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            this.tabPage3.ResumeLayout(false);
+            this.tabPage3.PerformLayout();
             this.groupBox11.ResumeLayout(false);
             this.groupBox11.PerformLayout();
             this.groupBox12.ResumeLayout(false);
-            this.tabPage3.ResumeLayout(false);
-            this.tabPage3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1474,6 +1604,8 @@ namespace OSD
         private System.Windows.Forms.Label lblRSSIMin;
         private System.Windows.Forms.NumericUpDown RSSI_numeric_max;
         private System.Windows.Forms.NumericUpDown RSSI_numeric_min;
+        private System.Windows.Forms.NumericUpDown LQ_numeric_max;
+        private System.Windows.Forms.NumericUpDown LQ_numeric_min;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.NumericUpDown MINVOLT_numeric;
@@ -1489,9 +1621,8 @@ namespace OSD
         private System.Windows.Forms.GroupBox groupBox7;
         private System.Windows.Forms.ComboBox ONOFF_combo;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.CheckBox RSSI_RAW;
         private System.Windows.Forms.CheckBox TOGGLE_BEH;
-        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label lblRSSIWarning;
         private System.Windows.Forms.NumericUpDown RSSI_WARNnumeric;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.NumericUpDown BATT_WARNnumeric;
@@ -1538,6 +1669,12 @@ namespace OSD
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.CheckBox cbxAutoUpdate;
         private System.Windows.Forms.CheckBox cbxShowUpdateDialog;
+        private System.Windows.Forms.ComboBox cbxLQChannel;
+        private System.Windows.Forms.Label lblLQChannel;
+        private System.Windows.Forms.Label lblLQMin;
+        private System.Windows.Forms.Label lblLQMax;
+        private System.Windows.Forms.Label lblLQWarning;
+        private System.Windows.Forms.NumericUpDown LQWARN_numeric;
     }
 }
 
