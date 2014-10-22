@@ -103,7 +103,7 @@ namespace OSD
             // load default bg picture
             try
             {
-                bgpicture = Image.FromFile("vlcsnap-2012-01-28-07h46m04s95.png");
+                bgpicture = Image.FromFile("background.png");
             }
             catch { }
             for (int i = 0; i < npanel; i++)
