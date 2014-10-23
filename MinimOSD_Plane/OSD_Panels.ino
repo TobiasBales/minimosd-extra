@@ -324,16 +324,16 @@ void panRSSI(int first_col, int first_line){
           lq = chan4_raw / 10;
           break;
         case 5:
-          lq = chan4_raw / 10;
+          lq = chan5_raw / 10;
           break;
         case 6:
-          lq = chan4_raw / 10;
+          lq = chan6_raw / 10;
           break;
         case 7:
-          lq = chan4_raw / 10;
+          lq = chan7_raw / 10;
           break;
         case 8:
-          lq = chan4_raw / 10;
+          lq = chan8_raw / 10;
           break;
       }
 
