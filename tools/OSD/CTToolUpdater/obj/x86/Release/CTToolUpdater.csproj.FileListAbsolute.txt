@@ -5,3 +5,8 @@ E:\Documents and Settings\vitorr\My Documents\minimosd-extra\trunk\Tools\OSD\CTT
 E:\Documents and Settings\vitorr\My Documents\minimosd-extra\trunk\Tools\OSD\CTToolUpdater\obj\x86\Release\CTToolUpdater.pdb
 E:\Documents and Settings\vitorr\My Documents\minimosd-extra\trunk\Tools\OSD\bin\Release\CTToolUpdater.exe
 E:\Documents and Settings\vitorr\My Documents\minimosd-extra\trunk\Tools\OSD\bin\Release\CTToolUpdater.pdb
+\\VBOXSVR\fpv\minimosd-extra\tools\OSD\bin\Release\CTToolUpdater.exe
+\\VBOXSVR\fpv\minimosd-extra\tools\OSD\bin\Release\CTToolUpdater.pdb
+\\VBOXSVR\fpv\minimosd-extra\tools\OSD\CTToolUpdater\obj\x86\Release\CTToolUpdater.csprojResolveAssemblyReference.cache
+\\VBOXSVR\fpv\minimosd-extra\tools\OSD\CTToolUpdater\obj\x86\Release\CTToolUpdater.exe
+\\VBOXSVR\fpv\minimosd-extra\tools\OSD\CTToolUpdater\obj\x86\Release\CTToolUpdater.pdb

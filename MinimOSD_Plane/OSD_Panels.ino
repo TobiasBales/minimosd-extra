@@ -10,7 +10,7 @@ void startPanels(){
 void panLogo(){
     osd.setPanel(5, 5);
     osd.openPanel();
-    osd.printf_P(PSTR("MinimOSD-Extra 2.4|Plane r795"));
+    osd.printf_P(PSTR("MinimOSD-LR edition"));
     osd.closePanel();
 }
 
@@ -32,7 +32,7 @@ void writePanels(){
     //panLogo();
     //waitingMAVBeats = 1;
     //Display our logo and wait...
-    panWaitMAVBeats(5,10); //Waiting for MAVBeats...
+    panWaitMAVBeats(9, 4); //Waiting for MAVBeats...
   }
   //Flight summary panel
   //Only show flight summary 7 seconds after landing
@@ -100,7 +100,7 @@ void writePanels(){
       if(ISd(panel,RSSI_BIT)) panRSSI(panRSSI_XY[0][panel], panRSSI_XY[1][panel]); //??x??
       if(ISd(panel,Eff_BIT)) panEff(panEff_XY[0][panel], panEff_XY[1][panel]);
       if(ISd(panel,CALLSIGN_BIT)) panCALLSIGN(panCALLSIGN_XY[0][panel], panCALLSIGN_XY[1][panel]);
-      if(ISe(panel,TEMP_BIT)) panTemp(panTemp_XY[0][panel], panTemp_XY[1][panel]);
+      //if(ISe(panel,TEMP_BIT)) panTemp(panTemp_XY[0][panel], panTemp_XY[1][panel]);
       //if(ISe(panel,Ch_BIT)) panCh(panCh_XY[0][panel], panCh_XY[1][panel]);
       if(ISe(panel,DIST_BIT)) panDistance(panDistance_XY[0][panel], panDistance_XY[1][panel]);
     }
@@ -166,9 +166,9 @@ void panDistance(int first_col, int first_line){
     osd.openPanel();
     //do_converts();
     if ((tdistance * converth) > 9999.0) {
-      osd.printf("%c%5.2f%c", 0x8f, ((tdistance * converth) / distconv), distchar);
+      osd.printf("%c%4.2f%c", 0x8f, ((tdistance * converth) / distconv), distchar);
     }else{
-      osd.printf("%c%5.0f%c", 0x8f, (tdistance * converth), high);
+      osd.printf("%c%4.0f%c", 0x8f, (tdistance * converth), high);
     }
     osd.closePanel();
 }
@@ -194,13 +194,13 @@ void panFdata(){
 // Size   : 1 x 7Hea  (rows x chars)
 // Staus  : done
 
-void panTemp(int first_col, int first_line){
-    osd.setPanel(first_col, first_line);
-    osd.openPanel();
+//void panTemp(int first_col, int first_line){
+    //osd.setPanel(first_col, first_line);
+    //osd.openPanel();
 //    osd.printf("%c%5.1f%c", 0x0a, (float(temperature * tempconv + tempconvAdd) / 100), temps);
-    osd.printf("%5.1f%c", (float(temperature * tempconv + tempconvAdd) / 1000), temps);
-    osd.closePanel();
-}
+    //osd.printf("%5.1f%c", (float(temperature * tempconv + tempconvAdd) / 1000), temps);
+    //osd.closePanel();
+//}
 
 /* **************************************************************** */
 // Panel  : efficiency
@@ -214,15 +214,15 @@ void panEff(int first_col, int first_line){
     osd.openPanel();
     if (osd_throttle >= 1){
       if (ma == 0) {
-              ma = 1;
-            }
-        if (osd_groundspeed != 0) eff = (float(osd_curr_A * 10.0) / (osd_groundspeed * converts))* 0.1 + eff * 0.9;
-//        eff = eff * 0.2 + eff * 0.8;
-          if (eff > 0 && eff <= 9999) {
-            osd.printf("%c%4.0f%c", 0x16, eff, 0x01);
-          }else{
-          osd.printf_P(PSTR("\x16\x20\x20\x20\x20\x20"));
-          }
+       ma = 1;
+      }
+      if (osd_groundspeed != 0) eff = (float(osd_curr_A * 10.0) / (osd_groundspeed * converts))* 0.1 + eff * 0.9;
+      //        eff = eff * 0.2 + eff * 0.8;
+      if (eff > 0 && eff <= 9999) {
+        osd.printf("%c%4.0f%c", 0x16, eff, 0x01);
+      }else{
+        osd.printf_P(PSTR("\x16\x20\x20\x20\x20\x20"));
+      }
 
     }else{
 
@@ -270,10 +270,10 @@ void panEff(int first_col, int first_line){
 //}
 
 /* **************************************************************** */
-// Panel  : panRSSI  ---modified to show ezuhf rssi from chan4 and lq from chan6----
+// Panel  : panRSSI
 // Needs  : X, Y locations
-// Output : transmitter-symbol, rssi scaled to percent, percent-symbol,
-//              lq-symbol, lq scaled to percent, percent-symbol
+// Output : transmitter-symbol, rssi , percent-symbol,
+//              lq-symbol, lq scaled, percent-symbol
 // Size   : 2 x 5Hea  (rows x chars)
 // Staus  : done
 
@@ -281,35 +281,72 @@ void panRSSI(int first_col, int first_line){
     osd.setPanel(first_col, first_line);
     osd.openPanel();
 
-  // define variables
-    rssi_max = 993;                                       // lowest pwm-value = BEST signal when tx ON
-    rssi_min = 1601;                                      // highest pwm-value = WORST signal when tx OFF
-    rssi_range = rssi_min - rssi_max;                // defines rssi-range
-    rssi_multip = (100.0 / rssi_range) * (-1.0);  // defines multiplier for scaling to percent and inverts ezuhf's descending to ascending values
-    rssi_offset = ((rssi_max * rssi_multip) * (-1.0)) + 100.0; // defines offset for scaling to 0-100
-    ezrssi = (chan7_raw * rssi_multip) + rssi_offset;  // scaling calculation based on above variables; set channel number to match ezuhf-receiver's settings
-    lq_min = 1057;                                                // insert lowest value from raw-screen when tx switched off
-    lq_max = 1793;                                               // insert highest value from raw-screen when tx switched on
-    lq_range = lq_max - lq_min;                             // defines value range
-    lq_multip = 100.0 / lq_range;                            // defines multiplier for percentage scaling
-    lq_offset = (lq_max * lq_multip) - 100.0;           // defines offset for 0-100 scaling
-    ezlq = (chan8_raw * lq_multip) - lq_offset;        // scaling calculation based on above variables; set rc channel number to match receiver's settings
+    // Get the rssi from the specified source
+    switch(rssi_source)
+    {
+      case 4:
+        rssi = chan4_raw / 10;
+        break;
+      case 5:
+        rssi = chan5_raw / 10;
+        break;
+      case 6:
+        rssi = chan6_raw / 10;
+        break;
+      case 7:
+        rssi = chan7_raw / 10;
+        break;
+      case 8:
+        rssi = chan8_raw / 10;
+        break;
+      default:
+        rssi = osd_rssi;
+        break;
+    }
 
-    byte ezRssiString = 0x09;
-  
-    // check if RSSI is under warn level    
-    if ((ezrssi < rssi_warn_level) && blinker){
-      ezRssiString  = 0x20;
-    } 
-    
-    byte ezLQString = 0x40;
-  
-    // check if LQ is under warn level    
-    if ((ezlq < rssi_warn_level) && blinker){
-      ezLQString  = 0x20;
-    } 
-    
-    osd.printf("%c%4.0i%c|%c%4.0i%c", ezRssiString, ezrssi, 0x25, ezLQString, ezlq, 0x25);  //prints two rows panel showing rssi in first and lq in second row
+    // Scale it to a percentage
+    rssi = (int)((rssi - rssi_min) / (float)(rssi_max - rssi_min) * 100);
+
+    // Check if the symbol should be drawn or not
+    rssi_symbol = 0x09;
+    if ((rssi < rssi_warn_level) && blinker) rssi_symbol = 0x20;
+
+    // Print the rssi row
+    osd.printf("%c%3.0i%c%c", rssi_symbol, rssi, 0x25, 0x00);
+
+    // If LQ is enabled
+    if (lq_source > 0)
+    {
+      // Get the LQ fro mthe specified source
+      switch(lq_source)
+      {
+        case 4:
+          lq = chan4_raw / 10;
+          break;
+        case 5:
+          lq = chan5_raw / 10;
+          break;
+        case 6:
+          lq = chan6_raw / 10;
+          break;
+        case 7:
+          lq = chan7_raw / 10;
+          break;
+        case 8:
+          lq = chan8_raw / 10;
+          break;
+      }
+
+      // Scale it to a percentage
+      lq = (int)((lq - lq_min) / (float)(lq_max - lq_min) * 100);
+
+      // Check if the symbol should be drawn or not
+      lq_symbol = 0x40;
+      if ((lq < lq_warn_level) && blinker) lq_symbol = 0x20;
+
+      // Print the LQ row
+      osd.printf("|%c%3.0i%c%c", lq_symbol, lq, 0x25, 0x00);
+    }
     osd.closePanel();
 }
 
@@ -548,7 +585,7 @@ void panCur_A(int first_col, int first_line){
     osd.setPanel(first_col, first_line);
     osd.openPanel();
 //    osd.printf("%c%5.2f%c", 0xbd, (float(osd_curr_A) * 0.01), 0x0e);
-    osd.printf("%5.2f%c", (float(osd_curr_A) * 0.01), 0x0e);
+    osd.printf("%4.1f%c", (float(osd_curr_A) * 0.01), 0x0e);
     osd.closePanel();
 }
 
@@ -565,7 +602,7 @@ void panAlt(int first_col, int first_line){
 //    osd.printf("%c%5.0f%c",0x11, (double)(osd_alt * converth), high);
 //    if (iconMSL == 1)
     if(EEPROM.read(SIGN_MSL_ON_ADDR) != 0) osd.printf_P(PSTR("\x11"));
-    osd.printf("%5.0f%c", (double)(osd_alt * converth), high);
+    osd.printf("%4.0f%c", (double)(osd_alt * converth), high);
     osd.closePanel();
 }
 
@@ -597,7 +634,7 @@ void panHomeAlt(int first_col, int first_line){
 //    osd.printf("%c%5.0f%c",0x12, (double)(osd_alt_to_home * converth), high);
 //    if (iconHA == 1)
     if(EEPROM.read(SIGN_HA_ON_ADDR) != 0) osd.printf_P(PSTR("\x12"));
-    osd.printf("%5.0f%c", (double)(osd_alt_to_home * converth), high);
+    osd.printf("%4.0f%c", (double)(osd_alt_to_home * converth), high);
     osd.closePanel();
 }
 
@@ -614,7 +651,7 @@ void panVel(int first_col, int first_line){
 //    osd.printf("%c%3.0f%c",0x14,(double)(osd_groundspeed * converts),spe);
 //    if (iconGS == 1)
     if(EEPROM.read(SIGN_GS_ON_ADDR) != 0) osd.printf_P(PSTR("\x14"));
-    osd.printf("%3.0f%c",(double)(osd_groundspeed * converts),spe);
+    osd.printf("%4.0f%c",(double)(osd_groundspeed * converts),spe);
     osd.closePanel();
 }
 
@@ -668,7 +705,7 @@ void panWarn(int first_col, int first_line){
                   warning[4] = 1;
                   warning[0] = 1;
                   }
-                if (rssi < rssi_warn_level && rssi != -99 && !rssiraw_on) {
+                if (rssi < rssi_warn_level && rssi != -99 && !rssi_source) {
                   warning[5] = 1;
                   warning[0] = 1;
                   }
@@ -744,7 +781,7 @@ void panThr(int first_col, int first_line){
     osd.setPanel(first_col, first_line);
     osd.openPanel();
 //    osd.printf("%c%3.0i%c",0x14,osd_throttle,0x25);
-    osd.printf("%3.0i%c",osd_throttle,0x25);
+    osd.printf("%4.0i%c",osd_throttle,0x25);
     osd.closePanel();
 }
 
@@ -760,9 +797,9 @@ void panBatteryPercent(int first_col, int first_line){
     osd.openPanel();
 
     if (EEPROM.read(OSD_BATT_SHOW_PERCENT_ADDR) == 1){
-        osd.printf("%c%3.0i%c", 0x17, osd_battery_remaining_A, 0x25);
+        osd.printf("%c%c%c%3.0i%c", 0x00, 0x00, 0x17, osd_battery_remaining_A, 0x25);
     }else{
-        osd.printf("%c%4.0f%c", 0x17, mah_used, 0x01);
+        osd.printf("%c%5.0f%c", 0x17, mah_used, 0x01);
     }
     osd.closePanel();
 }
@@ -805,9 +842,9 @@ void panHomeDis(int first_col, int first_line){
 
 
     if ((osd_home_distance * converth) > 9999.0) {
-      osd.printf("%c%5.2f%c", 0x0b, ((osd_home_distance * converth) / distconv), distchar);
+      osd.printf("%c%4.2f%c", 0x0b, ((osd_home_distance * converth) / distconv), distchar);
     }else{
-      osd.printf("%c%5.0f%c", 0x0b, (osd_home_distance * converth), high);
+      osd.printf("%c%4.0f%c", 0x0b, (osd_home_distance * converth), high);
     }
 
     osd.closePanel();
@@ -945,7 +982,7 @@ void panGPSats(int first_col, int first_line){
     if ((eph >= 200) && blinker)
        gps_str = 0x20;
 
-    osd.printf("%c%2i", gps_str, osd_satellites_visible);
+    osd.printf("%2i%c", osd_satellites_visible, gps_str);
     osd.closePanel();
 }
 
@@ -976,7 +1013,7 @@ void panGPS(int first_col, int first_line){
 void panHeading(int first_col, int first_line){
     osd.setPanel(first_col, first_line);
     osd.openPanel();
-    osd.printf("%4.0f%c", (double)osd_heading, 0x05);
+    osd.printf("%3.0f%c", (double)osd_heading, 0x05);
     osd.closePanel();
 }
 
@@ -1107,18 +1144,18 @@ void panFlightMode(int first_col, int first_line){
     osd.openPanel();
     //char c1 = 0x7f ;//"; char c2; char c3; char c4; char c5;
     char* mode_str="";
-    if (osd_mode == 0) mode_str = "manu"; //Manual
-    if (osd_mode == 1) mode_str = "circ"; //CIRCLE
-    if (osd_mode == 2) mode_str = "stab"; //Stabilize
-    if (osd_mode == 3) mode_str = "trai"; //Training
-    if (osd_mode == 4) mode_str = "acro"; //ACRO
-    if (osd_mode == 5) mode_str = "fbwa"; //FLY_BY_WIRE_A
-    if (osd_mode == 6) mode_str = "fbwb"; //FLY_BY_WIRE_B
-    if (osd_mode == 7) mode_str = "cruz"; //Cruise
-    if (osd_mode == 10) mode_str = "auto"; //AUTO
-    if (osd_mode == 11) mode_str = "retl"; //Return to Launch
-    if (osd_mode == 12) mode_str = "loit"; //Loiter
-    if (osd_mode == 15) mode_str = "guid"; //GUIDED
+    if (osd_mode == 0) mode_str = "manual"; //Manual
+    if (osd_mode == 1) mode_str = "circle"; //CIRCLE
+    if (osd_mode == 2) mode_str = " stab "; //Stabilize
+    if (osd_mode == 3) mode_str = "train "; //Training
+    if (osd_mode == 4) mode_str = " acro "; //ACRO
+    if (osd_mode == 5) mode_str = " fbwa "; //FLY_BY_WIRE_A
+    if (osd_mode == 6) mode_str = " fbwb "; //FLY_BY_WIRE_B
+    if (osd_mode == 7) mode_str = "cruise"; //Cruise
+    if (osd_mode == 10) mode_str = " auto "; //AUTO
+    if (osd_mode == 11) mode_str = " retl "; //Return to Launch
+    if (osd_mode == 12) mode_str = "loiter"; //Loiter
+    if (osd_mode == 15) mode_str = "guided"; //GUIDED
 
 
 //    osd.printf("%c%s", 0x7f, mode_str);
@@ -1293,9 +1330,9 @@ void do_converts()
         converth = 1.0;
         spe = 0x10;
         high = 0x0c;
-        temps = 0xba;
-        tempconv = 10;
-        tempconvAdd = 0;
+        //temps = 0xba;
+        //tempconv = 10;
+        //tempconvAdd = 0;
         distchar = 0x1b;
         distconv = 1000;
         climbchar = 0x1a;
@@ -1304,9 +1341,9 @@ void do_converts()
         converth = 3.28;
         spe = 0x19;
         high = 0x66;
-        temps = 0xbb;
-        tempconv = 18;
-        tempconvAdd = 32000;
+        //temps = 0xbb;
+        //tempconv = 18;
+        //tempconvAdd = 32000;
         distchar = 0x1c;
         distconv = 5280;
         climbchar = 0x1e;
@@ -1331,3 +1368,6 @@ void timers()
 //  }
 //  }
 }
+
+
+

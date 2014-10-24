@@ -15,7 +15,7 @@ void request_mavlink_rates()
         MAV_DATA_STREAM_EXTENDED_STATUS,
         MAV_DATA_STREAM_RC_CHANNELS,
         MAV_DATA_STREAM_POSITION,
-        MAV_DATA_STREAM_EXTRA1, 
+        MAV_DATA_STREAM_EXTRA1,
         MAV_DATA_STREAM_EXTRA2};
     const uint16_t MAVRates[maxStreams] = {0x02, 0x02, 0x05, 0x02, 0x05, 0x02};
     for (int i=0; i < maxStreams; i++) {
@@ -26,11 +26,11 @@ void request_mavlink_rates()
 }
 
 void read_mavlink(){
-    mavlink_message_t msg; 
+    mavlink_message_t msg;
     mavlink_status_t status;
 
-    //grabing data 
-    while(Serial.available() > 0) { 
+    //grabing data
+    while(Serial.available() > 0) {
         uint8_t c = Serial.read();
 
         /* allow CLI to be started by hitting enter 3 times, if no
@@ -46,7 +46,7 @@ void read_mavlink(){
 //            }
         }
 
-        //trying to grab msg  
+        //trying to grab msg
         if(mavlink_parse_char(MAVLINK_COMM_0, c, &msg, &status)) {
             lastMAVBeat = millis();
             mavlink_active = 1;
@@ -57,7 +57,7 @@ void read_mavlink(){
                     mavbeat = 1;
                     apm_mav_system    = msg.sysid;
                     apm_mav_component = msg.compid;
-//                    apm_mav_type      = mavlink_msg_heartbeat_get_type(&msg);            
+//                    apm_mav_type      = mavlink_msg_heartbeat_get_type(&msg);
                  //   osd_mode = mavlink_msg_heartbeat_get_custom_mode(&msg);
                     osd_mode = (uint8_t)mavlink_msg_heartbeat_get_custom_mode(&msg);
                     //Mode (arducoper armed/disarmed)
@@ -65,7 +65,7 @@ void read_mavlink(){
 //                    if(getBit(base_mode,7)) motor_armed = 1;
 //                    else motor_armed = 0;
 
-                    osd_nav_mode = 0;          
+                    osd_nav_mode = 0;
                     /*lastMAVBeat = millis();
                     if(waitingMAVBeats == 1){
                         enable_mav_request = 1;
@@ -76,7 +76,7 @@ void read_mavlink(){
                 {
 
                     osd_vbat_A = (mavlink_msg_sys_status_get_voltage_battery(&msg) / 1000.0f); //Battery voltage, in millivolts (1 = 1 millivolt)
-                    osd_curr_A = mavlink_msg_sys_status_get_current_battery(&msg); //Battery current, in 10*milliamperes (1 = 10 milliampere)         
+                    osd_curr_A = mavlink_msg_sys_status_get_current_battery(&msg); //Battery current, in 10*milliamperes (1 = 10 milliampere)
                     osd_battery_remaining_A = mavlink_msg_sys_status_get_battery_remaining(&msg); //Remaining battery energy: (0%: 0, 100%: 100)
                     //osd_mode = apm_mav_component;//Debug
                     //osd_nav_mode = apm_mav_system;//Debug
@@ -92,7 +92,7 @@ void read_mavlink(){
                     osd_cog = mavlink_msg_gps_raw_int_get_cog(&msg);
                     eph = mavlink_msg_gps_raw_int_get_eph(&msg);
                 }
-                break; 
+                break;
             case MAVLINK_MSG_ID_VFR_HUD:
                 {
                     osd_airspeed = mavlink_msg_vfr_hud_get_airspeed(&msg);
@@ -132,14 +132,14 @@ void read_mavlink(){
 //                    chan1_raw = mavlink_msg_rc_channels_raw_get_chan1_raw(&msg);
 //                    chan2_raw = mavlink_msg_rc_channels_raw_get_chan2_raw(&msg);
 //                    chan3_raw = mavlink_msg_rc_channels_raw_get_chan3_raw(&msg);
-//                    chan4_raw = mavlink_msg_rc_channels_raw_get_chan4_raw(&msg);
+                    chan4_raw = mavlink_msg_rc_channels_raw_get_chan4_raw(&msg);
                     chan5_raw = mavlink_msg_rc_channels_raw_get_chan5_raw(&msg);
                     chan6_raw = mavlink_msg_rc_channels_raw_get_chan6_raw(&msg);
                     chan7_raw = mavlink_msg_rc_channels_raw_get_chan7_raw(&msg);
                     chan8_raw = mavlink_msg_rc_channels_raw_get_chan8_raw(&msg);
                     osd_rssi = mavlink_msg_rc_channels_raw_get_rssi(&msg);
                 }
-                break;           
+                break;
             case MAVLINK_MSG_ID_WIND:
                 {
 //                  if (osd_climb < 1.66 && osd_climb > -1.66){
@@ -149,10 +149,10 @@ void read_mavlink(){
 //                  }
                 }
                 break;
-            case MAVLINK_MSG_ID_SCALED_PRESSURE:
-                {
-                    temperature = mavlink_msg_scaled_pressure_get_temperature(&msg);
-                }
+            //case MAVLINK_MSG_ID_SCALED_PRESSURE:
+                //{
+                    //temperature = mavlink_msg_scaled_pressure_get_temperature(&msg);
+                //}
                 break;
             case MAVLINK_MSG_ID_GLOBAL_POSITION_INT:
                 {

@@ -38,7 +38,7 @@ static uint16_t     ch_raw = 0;
 //static uint16_t     chan1_raw = 0;
 //static uint16_t     chan2_raw = 0;
 //static uint16_t     chan3_raw = 0;
-//static uint16_t     chan4_raw = 0;
+static uint16_t     chan4_raw = 0;
 static uint16_t     chan5_raw = 0;
 static uint16_t     chan6_raw = 0;
 static uint16_t     chan7_raw = 0;
@@ -65,7 +65,7 @@ static uint16_t     distconv = 0;
 
 static uint8_t      spe = 0;
 static uint8_t      high = 0;
-static int16_t      temps = 0;
+//static int16_t      temps = 0;
 static float        osd_vbat_A = 0;                 // Battery A voltage in milivolt
 static int16_t      osd_curr_A = 0;                 // Battery A current
 static float        mah_used = 0;
@@ -136,9 +136,9 @@ static int8_t       osd_COG_arrow_rotate_int;
 
 static float        osd_groundspeed = 0;            // ground speed
 static uint8_t     osd_throttle = 0;               // throtle
-static uint16_t     temperature = 0;
-static uint8_t      tempconv = 1;
-static uint16_t     tempconvAdd = 0;
+//static uint16_t     temperature = 0;
+//static uint8_t      tempconv = 1;
+//static uint16_t     tempconvAdd = 0;
 static byte     distchar = 0;
 static byte     climbchar = 0;
 //static byte     signDist = 0x20;
@@ -238,28 +238,24 @@ byte panRSSI_XY[2][npanels];
 byte panEff_XY[2][npanels];
 byte panCALLSIGN_XY[2][npanels];
 // byte panCh_XY[2][npanels];
-byte panTemp_XY[2][npanels];
+//byte panTemp_XY[2][npanels];
 byte panDistance_XY[2][npanels];
 
 //*************************************************************************************************************
 //rssi varables
-static uint8_t      rssipersent = 0;
-static uint8_t      rssical = 0;
+static uint8_t      rssi_min = 0;
+static uint8_t      rssi_max = 0;
 static uint8_t      osd_rssi = 0; //raw value from mavlink
 static int16_t      rssi = -99; // scaled value 0-100%
-static uint8_t      rssiraw_on = 0;
+static uint8_t      rssi_source = 0;
 static uint8_t      rssi_warn_level = 0;
+static byte         rssi_symbol = 0;
 
-// Custom EZUHF Code
-static uint16_t     ezrssi = 0;
-static uint16_t     ezlq = 0;
-static uint16_t     rssi_max = 0;
-static uint16_t     rssi_min = 0;
-static uint16_t     rssi_range = 0;
-static uint16_t     rssi_multip = -1000;
-static uint16_t     rssi_offset = -1000;
-static uint16_t     lq_max = 0;
-static uint16_t     lq_min = 0;
-static uint16_t     lq_range = 0;
-static uint16_t     lq_multip = 0;
-static uint16_t     lq_offset = 0;
+static uint16_t     lq = -99;
+static uint8_t      lq_min = 0;
+static uint8_t      lq_max = 0;
+static uint8_t      lq_source = 0;
+static uint8_t      lq_warn_level = 0;
+static byte         lq_symbol = 0;
+
+
